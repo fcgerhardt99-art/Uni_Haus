@@ -7,9 +7,7 @@
 <title>Uni-Haus Schauinsland</title>
 
 <style>
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 html{
   scroll-behavior:smooth;
@@ -17,112 +15,111 @@ html{
 
 body{
   margin:0;
-  font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
   font-weight:300;
   background:#f4f1ea;
   color:#111;
+  overflow-x:hidden;
 }
 
-a{
-  color:inherit;
-  text-decoration:none;
-}
+a{text-decoration:none;color:inherit}
 
 header{
   position:fixed;
-  top:18px;
+  top:24px;
   left:50%;
   transform:translateX(-50%);
-  width:calc(100% - 32px);
-  max-width:1180px;
-  z-index:100;
+  width:calc(100% - 64px);
+  z-index:50;
   display:flex;
-  align-items:center;
   justify-content:space-between;
-  padding:10px 12px 10px 20px;
+  align-items:center;
+  padding:14px 16px 14px 24px;
   border-radius:999px;
-  background:rgba(255,255,255,.72);
-  backdrop-filter:blur(22px);
-  box-shadow:0 20px 60px rgba(0,0,0,.12);
+  background:rgba(255,255,255,.68);
+  backdrop-filter:blur(28px);
+  box-shadow:0 24px 80px rgba(0,0,0,.13);
 }
 
 .logo{
-  font-size:16px;
+  font-size:15px;
   letter-spacing:-.04em;
 }
 
 nav{
   display:flex;
-  gap:24px;
+  gap:30px;
   font-size:14px;
-  color:rgba(0,0,0,.65);
+  color:rgba(0,0,0,.6);
 }
 
 .nav-button{
   background:#111;
   color:white;
-  padding:12px 18px;
+  padding:13px 21px;
   border-radius:999px;
   font-size:14px;
 }
 
 .hero{
   min-height:100vh;
-  position:relative;
+  width:100%;
   display:flex;
   align-items:flex-end;
-  padding:130px 5vw 5vw;
+  padding:150px 7vw 7vw;
   color:white;
   background:
-    linear-gradient(180deg, rgba(0,0,0,.12), rgba(0,0,0,.82)),
-    linear-gradient(90deg, rgba(0,0,0,.55), rgba(0,0,0,.05)),
+    linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.82)),
+    linear-gradient(90deg,rgba(0,0,0,.58),rgba(0,0,0,.06)),
     url("Uni-Haus_Schauinsland");
   background-size:cover;
   background-position:center;
 }
 
 .hero-content{
-  max-width:1150px;
+  width:100%;
+  animation:fadeUp 1.1s ease both;
 }
 
 .tag{
   display:inline-block;
-  padding:9px 14px;
-  border:1px solid rgba(255,255,255,.35);
+  padding:10px 16px;
   border-radius:999px;
+  border:1px solid rgba(255,255,255,.35);
   background:rgba(255,255,255,.12);
-  backdrop-filter:blur(12px);
-  margin-bottom:24px;
+  backdrop-filter:blur(14px);
+  margin-bottom:28px;
   font-size:14px;
 }
 
 h1{
   margin:0;
-  max-width:1100px;
-  font-size:clamp(58px,10vw,145px);
-  line-height:.82;
-  letter-spacing:-.095em;
+  max-width:1250px;
+  font-size:clamp(70px,11vw,170px);
+  line-height:.8;
+  letter-spacing:-.105em;
   font-weight:300;
 }
 
 .hero p{
-  max-width:650px;
-  font-size:clamp(18px,2vw,25px);
-  line-height:1.2;
-  opacity:.85;
-  letter-spacing:-.04em;
+  max-width:690px;
+  margin-top:34px;
+  font-size:clamp(20px,2.2vw,30px);
+  line-height:1.15;
+  letter-spacing:-.045em;
+  opacity:.86;
 }
 
 .hero-actions{
   display:flex;
-  gap:12px;
+  gap:14px;
   flex-wrap:wrap;
-  margin-top:30px;
+  margin-top:36px;
 }
 
 .btn{
   display:inline-block;
-  padding:15px 24px;
+  padding:17px 28px;
   border-radius:999px;
   font-size:15px;
 }
@@ -134,101 +131,106 @@ h1{
 
 .btn.secondary{
   background:rgba(255,255,255,.18);
-  border:1px solid rgba(255,255,255,.3);
   color:white;
+  border:1px solid rgba(255,255,255,.3);
+  backdrop-filter:blur(12px);
 }
 
 .stats{
-  max-width:1180px;
-  margin:-55px auto 0;
-  position:relative;
-  z-index:3;
-  padding:0 20px;
+  width:100%;
+  padding:36px 7vw 130px;
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:14px;
+  gap:20px;
+  background:#f4f1ea;
 }
 
 .stat{
   background:white;
-  border-radius:28px;
-  padding:28px;
-  box-shadow:0 20px 60px rgba(0,0,0,.1);
+  border-radius:36px;
+  padding:42px;
+  min-height:220px;
+  box-shadow:0 20px 70px rgba(0,0,0,.08);
 }
 
 .stat strong{
   display:block;
-  font-size:46px;
+  font-size:64px;
   font-weight:300;
-  letter-spacing:-.08em;
+  letter-spacing:-.09em;
+  margin-bottom:28px;
 }
 
 .stat span{
   color:#6f6a60;
+  font-size:18px;
+  line-height:1.25;
 }
 
 section{
-  max-width:1180px;
-  margin:0 auto;
-  padding:120px 20px;
+  width:100%;
+  padding:140px 7vw;
 }
 
 .section-head{
   display:grid;
-  grid-template-columns:.7fr 1.3fr;
-  gap:50px;
-  margin-bottom:40px;
+  grid-template-columns:.55fr 1.45fr;
+  gap:80px;
+  margin-bottom:70px;
 }
 
 .label{
   text-transform:uppercase;
-  letter-spacing:.13em;
+  letter-spacing:.14em;
   font-size:12px;
   color:#285b43;
+  padding-top:14px;
 }
 
 h2{
   margin:0;
-  font-size:clamp(40px,6vw,88px);
-  line-height:.9;
-  letter-spacing:-.08em;
+  max-width:1100px;
+  font-size:clamp(48px,7vw,110px);
+  line-height:.86;
+  letter-spacing:-.09em;
   font-weight:300;
 }
 
 .lead{
-  max-width:800px;
+  max-width:850px;
+  margin-top:32px;
   color:#6f6a60;
-  font-size:clamp(18px,2.1vw,27px);
-  line-height:1.18;
-  letter-spacing:-.04em;
+  font-size:clamp(20px,2.2vw,32px);
+  line-height:1.15;
+  letter-spacing:-.045em;
 }
 
 .cards{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:14px;
+  gap:24px;
 }
 
 .card{
   background:white;
-  border-radius:30px;
-  padding:28px;
-  min-height:270px;
+  border-radius:42px;
+  padding:42px;
+  min-height:360px;
   display:flex;
   flex-direction:column;
   justify-content:space-between;
   border:1px solid rgba(0,0,0,.08);
-  transition:.25s ease;
+  transition:transform .35s ease, box-shadow .35s ease;
 }
 
 .card:hover{
-  transform:translateY(-5px);
-  box-shadow:0 25px 70px rgba(0,0,0,.11);
+  transform:translateY(-9px);
+  box-shadow:0 34px 90px rgba(0,0,0,.13);
 }
 
 .number{
-  width:44px;
-  height:44px;
+  width:52px;
+  height:52px;
   border-radius:50%;
   background:#e8dfcf;
   color:#12382a;
@@ -238,24 +240,43 @@ h2{
 }
 
 .card h3{
-  margin:0 0 12px;
-  font-size:32px;
-  line-height:.95;
-  letter-spacing:-.06em;
+  margin:0 0 16px;
+  font-size:clamp(30px,3vw,48px);
+  line-height:.92;
+  letter-spacing:-.07em;
   font-weight:300;
 }
 
 .card p{
   margin:0;
   color:#6f6a60;
-  line-height:1.4;
+  font-size:18px;
+  line-height:1.38;
+}
+
+.transition-image{
+  width:100%;
+  height:80vh;
+  background:
+    linear-gradient(180deg,rgba(0,0,0,.1),rgba(0,0,0,.5)),
+    url("Uni-Haus_Schauinsland");
+  background-size:cover;
+  background-position:center;
+  background-attachment:fixed;
+  display:flex;
+  align-items:center;
+  padding:7vw;
+  color:white;
+}
+
+.transition-image h2{
+  max-width:1000px;
+  color:white;
 }
 
 .dark{
-  max-width:none;
   background:#12382a;
   color:white;
-  padding:120px max(20px, calc((100vw - 1180px) / 2));
 }
 
 .dark .label{
@@ -270,169 +291,171 @@ h2{
   display:grid;
   grid-template-columns:repeat(4,1fr);
   gap:1px;
-  border-radius:32px;
+  border-radius:44px;
   overflow:hidden;
   background:rgba(255,255,255,.18);
 }
 
 .step{
-  min-height:240px;
-  padding:28px;
+  min-height:340px;
+  padding:38px;
   background:rgba(255,255,255,.08);
 }
 
 .step span{
   display:block;
   color:#d8f05f;
-  margin-bottom:75px;
+  margin-bottom:120px;
   font-size:14px;
 }
 
 .step h3{
-  margin:0 0 10px;
-  font-size:26px;
-  line-height:1;
+  margin:0 0 14px;
+  font-size:32px;
+  line-height:.95;
   font-weight:300;
-  letter-spacing:-.05em;
+  letter-spacing:-.06em;
 }
 
 .step p{
   margin:0;
   color:rgba(255,255,255,.68);
   line-height:1.35;
+  font-size:17px;
 }
 
 .split{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:16px;
+  gap:28px;
   align-items:start;
 }
 
 .image-box{
-  min-height:650px;
-  border-radius:38px;
+  min-height:780px;
+  border-radius:48px;
   background:
-    linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.25)),
+    linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.25)),
     url("Uni-Haus_Schauinsland");
   background-size:cover;
   background-position:center;
   position:sticky;
-  top:110px;
+  top:120px;
 }
 
 .info-box{
   background:white;
-  border-radius:38px;
-  padding:36px;
-  border:1px solid rgba(0,0,0,.08);
+  border-radius:48px;
+  padding:56px;
 }
 
 .room-list{
   display:grid;
-  gap:12px;
-  margin-top:30px;
+  gap:16px;
+  margin-top:44px;
 }
 
 .room{
   display:grid;
   grid-template-columns:1fr auto;
-  gap:16px;
+  gap:20px;
   align-items:center;
   background:#f4f1ea;
-  border-radius:22px;
-  padding:18px;
+  border-radius:28px;
+  padding:24px;
 }
 
 .room strong{
   font-weight:400;
+  font-size:19px;
 }
 
 .room small{
   color:#6f6a60;
+  font-size:15px;
 }
 
 .pill{
   background:white;
   color:#12382a;
   border-radius:999px;
-  padding:9px 12px;
+  padding:10px 14px;
   font-size:13px;
   white-space:nowrap;
 }
 
 .booking{
   display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:18px;
+  grid-template-columns:.9fr 1.1fr;
+  gap:40px;
   align-items:start;
 }
 
 .booking-panel{
   background:white;
-  border-radius:36px;
-  padding:32px;
-  border:1px solid rgba(0,0,0,.08);
+  border-radius:48px;
+  padding:48px;
+  box-shadow:0 28px 90px rgba(0,0,0,.09);
 }
 
 form{
   display:grid;
-  gap:12px;
+  gap:18px;
 }
 
 .form-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:12px;
+  gap:18px;
 }
 
 label{
   display:grid;
-  gap:7px;
+  gap:9px;
   color:#6f6a60;
-  font-size:13px;
+  font-size:14px;
 }
 
 input,select{
   width:100%;
-  padding:14px;
-  border-radius:16px;
+  padding:18px;
+  border-radius:20px;
   border:1px solid rgba(0,0,0,.14);
   font:inherit;
   font-weight:300;
+  font-size:16px;
 }
 
 button{
   border:0;
   border-radius:999px;
-  padding:16px 22px;
+  padding:19px 24px;
   background:#12382a;
   color:white;
   font:inherit;
   cursor:pointer;
-  margin-top:8px;
+  margin-top:10px;
 }
 
 .result{
-  margin-top:16px;
-  padding:16px;
-  border-radius:22px;
+  margin-top:22px;
+  padding:22px;
+  border-radius:28px;
   background:#f4f1ea;
   color:#6f6a60;
-  line-height:1.4;
+  line-height:1.45;
 }
 
 .pricing{
   display:grid;
   grid-template-columns:1.2fr .8fr;
-  gap:14px;
+  gap:24px;
 }
 
 .price-card{
   background:white;
-  border-radius:32px;
-  padding:30px;
-  border:1px solid rgba(0,0,0,.08);
+  border-radius:42px;
+  padding:46px;
 }
 
 .price-card.black{
@@ -441,10 +464,10 @@ button{
 }
 
 .price-card h3{
-  margin:0 0 20px;
-  font-size:32px;
+  margin:0 0 28px;
+  font-size:44px;
   font-weight:300;
-  letter-spacing:-.06em;
+  letter-spacing:-.075em;
 }
 
 .price-card ul{
@@ -452,8 +475,9 @@ button{
   padding:0;
   margin:0;
   display:grid;
-  gap:13px;
+  gap:18px;
   color:#6f6a60;
+  font-size:18px;
 }
 
 .price-card.black ul{
@@ -463,12 +487,12 @@ button{
 .faq-grid{
   display:grid;
   grid-template-columns:.7fr 1.3fr;
-  gap:40px;
+  gap:80px;
 }
 
 details{
   border-top:1px solid rgba(0,0,0,.14);
-  padding:24px 0;
+  padding:32px 0;
 }
 
 details:last-child{
@@ -478,27 +502,25 @@ details:last-child{
 summary{
   cursor:pointer;
   list-style:none;
-  font-size:25px;
-  letter-spacing:-.05em;
+  font-size:32px;
+  letter-spacing:-.06em;
 }
 
-summary::-webkit-details-marker{
-  display:none;
-}
+summary::-webkit-details-marker{display:none}
 
 details p{
   color:#6f6a60;
   line-height:1.45;
-  max-width:720px;
+  max-width:800px;
+  font-size:18px;
 }
 
 footer{
-  max-width:1180px;
-  margin:0 auto;
-  padding:55px 20px 75px;
+  width:100%;
+  padding:70px 7vw 90px;
   display:flex;
   justify-content:space-between;
-  gap:24px;
+  gap:30px;
   border-top:1px solid rgba(0,0,0,.14);
   color:#6f6a60;
 }
@@ -508,13 +530,44 @@ footer strong{
   font-weight:400;
 }
 
+.reveal{
+  opacity:0;
+  transform:translateY(55px);
+  transition:opacity .9s ease, transform .9s ease;
+}
+
+.reveal.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+@keyframes fadeUp{
+  from{
+    opacity:0;
+    transform:translateY(40px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
 @media(max-width:900px){
+  header{
+    width:calc(100% - 28px);
+    top:14px;
+  }
+
   nav{
     display:none;
   }
 
   .hero{
-    padding:110px 20px 45px;
+    padding:120px 24px 60px;
+  }
+
+  h1{
+    font-size:64px;
   }
 
   .stats,
@@ -528,30 +581,33 @@ footer strong{
     grid-template-columns:1fr;
   }
 
-  .stats{
-    margin:20px auto 0;
-  }
-
   section{
-    padding:85px 20px;
+    padding:90px 24px;
   }
 
-  .dark{
-    padding:85px 20px;
+  .stats{
+    padding:24px 24px 90px;
+  }
+
+  .transition-image{
+    height:65vh;
+    background-attachment:scroll;
+    padding:24px;
   }
 
   .image-box{
-    min-height:380px;
+    min-height:420px;
     position:relative;
     top:auto;
   }
 
-  footer{
-    flex-direction:column;
+  .form-grid{
+    grid-template-columns:1fr;
   }
 
-  h1{
-    font-size:64px;
+  footer{
+    flex-direction:column;
+    padding:55px 24px 70px;
   }
 }
 </style>
@@ -578,13 +634,8 @@ footer strong{
 <section class="hero">
   <div class="hero-content">
     <div class="tag">Retreats · Seminare · Teambuilding</div>
-
     <h1>Raus aus dem Campus. Rein in den Schwarzwald.</h1>
-
-    <p>
-      Das Uni-Haus Schauinsland als moderner Ort für Gruppenfahrten,
-      Seminare, Fachschaften und konzentrierte Arbeitsphasen.
-    </p>
+    <p>Das Uni-Haus Schauinsland als moderner Ort für Gruppenfahrten, Seminare, Fachschaften und konzentrierte Arbeitsphasen.</p>
 
     <div class="hero-actions">
       <a class="btn primary" href="#buchung">Verfügbarkeit prüfen</a>
@@ -593,7 +644,7 @@ footer strong{
   </div>
 </section>
 
-<div class="stats">
+<div class="stats reveal">
   <div class="stat">
     <strong>01</strong>
     <span>Haus für Gruppen, Seminare und Aufenthalte</span>
@@ -608,15 +659,12 @@ footer strong{
   </div>
 </div>
 
-<section id="zielgruppen">
+<section id="zielgruppen" class="reveal">
   <div class="section-head">
     <div class="label">Für wen?</div>
     <div>
       <h2>Gebaut für Gruppen, nicht für Einzelbett-Chaos.</h2>
-      <p class="lead">
-        Die Website denkt die Hütte wie ein modernes Retreat-Haus:
-        schnell verstehen, was möglich ist, direkt den passenden Aufenthalt planen.
-      </p>
+      <p class="lead">Die Website denkt die Hütte wie ein modernes Retreat-Haus: schnell verstehen, was möglich ist, direkt den passenden Aufenthalt planen.</p>
     </div>
   </div>
 
@@ -647,15 +695,16 @@ footer strong{
   </div>
 </section>
 
-<section class="dark" id="ablauf">
+<div class="transition-image">
+  <h2>Ein Ort zwischen Arbeit, Austausch und Abstand.</h2>
+</div>
+
+<section class="dark reveal" id="ablauf">
   <div class="section-head">
     <div class="label">Buchungslogik</div>
     <div>
       <h2>Vier Schritte statt Mail-Pingpong.</h2>
-      <p class="lead">
-        Von der Anfrage bis zum Check-out wird der Ablauf klar geführt –
-        für Nutzer:innen und Verwaltung.
-      </p>
+      <p class="lead">Von der Anfrage bis zum Check-out wird der Ablauf klar geführt – für Nutzer:innen und Verwaltung.</p>
     </div>
   </div>
 
@@ -686,17 +735,13 @@ footer strong{
   </div>
 </section>
 
-<section id="raeume" class="split">
+<section id="raeume" class="split reveal">
   <div class="image-box"></div>
 
   <div class="info-box">
     <div class="label">Haus & Räume</div>
     <h2>Alles sichtbar, was buchbar ist.</h2>
-    <p class="lead">
-      Die Website funktioniert wie ein digitales Hausprofil:
-      Zimmer nicht als Betten verkaufen, Seminarräume klar trennen
-      und Ausstattung ohne Nachfragen erklären.
-    </p>
+    <p class="lead">Die Website funktioniert wie ein digitales Hausprofil: Zimmer nicht als Betten verkaufen, Seminarräume klar trennen und Ausstattung ohne Nachfragen erklären.</p>
 
     <div class="room-list">
       <div class="room">
@@ -734,39 +779,31 @@ footer strong{
   </div>
 </section>
 
-<section id="buchung" class="booking">
+<section id="buchung" class="booking reveal">
   <div>
     <div class="label">Buchung</div>
     <h2>Aufenthalt anfragen.</h2>
-    <p class="lead">
-      Statischer GitHub-Prototyp mit Demo-Preislogik.
-      Später kann das Formular an ein PMS, eine Booking Engine
-      oder ein Formular-Backend angebunden werden.
-    </p>
+    <p class="lead">Statischer GitHub-Prototyp mit Demo-Preislogik. Später kann das Formular an ein PMS, eine Booking Engine oder ein Formular-Backend angebunden werden.</p>
   </div>
 
   <div class="booking-panel">
     <form id="bookingForm">
       <div class="form-grid">
-        <label>
-          Anreise
+        <label>Anreise
           <input type="date" id="startDate" required>
         </label>
 
-        <label>
-          Abreise
+        <label>Abreise
           <input type="date" id="endDate" required>
         </label>
       </div>
 
       <div class="form-grid">
-        <label>
-          Personen
+        <label>Personen
           <input type="number" id="people" min="1" max="60" value="14">
         </label>
 
-        <label>
-          Gruppe
+        <label>Gruppe
           <select id="groupType">
             <option value="student">Studierende</option>
             <option value="teacher">Uni-intern</option>
@@ -775,8 +812,7 @@ footer strong{
         </label>
       </div>
 
-      <label>
-        Nutzung
+      <label>Nutzung
         <select id="usageType">
           <option value="overnight">Übernachtung</option>
           <option value="seminar">Seminarraum</option>
@@ -793,15 +829,12 @@ footer strong{
   </div>
 </section>
 
-<section id="preise">
+<section id="preise" class="reveal">
   <div class="section-head">
     <div class="label">Preislogik</div>
     <div>
       <h2>Transparent, fair und automatisierbar.</h2>
-      <p class="lead">
-        Nutzer:innen sollen sofort verstehen, wovon der Preis abhängt:
-        Zeitraum, Gruppe, Nutzung und Stornoregeln.
-      </p>
+      <p class="lead">Nutzer:innen sollen sofort verstehen, wovon der Preis abhängt: Zeitraum, Gruppe, Nutzung und Stornoregeln.</p>
     </div>
   </div>
 
@@ -830,15 +863,16 @@ footer strong{
   </div>
 </section>
 
-<section>
+<div class="transition-image">
+  <h2>Mobilität wird mitgedacht – von ÖPNV bis Shuttle.</h2>
+</div>
+
+<section class="reveal">
   <div class="section-head">
     <div class="label">Mobilität</div>
     <div>
       <h2>Anreise als Teil des Konzepts.</h2>
-      <p class="lead">
-        ÖPNV, Fahrrad, E-Bike, Shuttle und Fahrgemeinschaften werden
-        direkt mitgedacht – nicht als Fußnote, sondern als eigener Planungsbereich.
-      </p>
+      <p class="lead">ÖPNV, Fahrrad, E-Bike, Shuttle und Fahrgemeinschaften werden direkt mitgedacht – nicht als Fußnote, sondern als eigener Planungsbereich.</p>
     </div>
   </div>
 
@@ -869,7 +903,7 @@ footer strong{
   </div>
 </section>
 
-<section id="faq" class="faq-grid">
+<section id="faq" class="faq-grid reveal">
   <div>
     <div class="label">FAQ</div>
     <h2>Weniger Rückfragen. Mehr Klarheit.</h2>
@@ -962,6 +996,22 @@ form.addEventListener("submit", function(e){
     "<strong>" + nights + " Nacht/Nächte · " + people + " Personen · " + labels[group] + "</strong><br>" +
     "Grobe Demo-Rechnung: ca. <strong>" + price.toLocaleString("de-DE") + " €</strong><br><br>" +
     "Für echte Buchungen müssten Kalender, PMS, Zahlungsanbieter und Stornoregeln angebunden werden.";
+});
+
+const reveals = document.querySelectorAll(".reveal");
+
+const observer = new IntersectionObserver(function(entries){
+  entries.forEach(function(entry){
+    if(entry.isIntersecting){
+      entry.target.classList.add("visible");
+    }
+  });
+},{
+  threshold:0.14
+});
+
+reveals.forEach(function(el){
+  observer.observe(el);
 });
 </script>
 
