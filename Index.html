@@ -1,0 +1,730 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Uni-Haus Schauinsland</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-weight: 300;
+      background: #f4f2ec;
+      color: #111;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    header {
+      position: fixed;
+      top: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(100% - 32px);
+      max-width: 1180px;
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 18px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.72);
+      backdrop-filter: blur(20px);
+    }
+
+    .logo {
+      font-weight: 400;
+      letter-spacing: -0.04em;
+    }
+
+    nav {
+      display: flex;
+      gap: 24px;
+      font-size: 14px;
+    }
+
+    nav a {
+      color: #111;
+      text-decoration: none;
+      opacity: .75;
+    }
+
+    .book-btn {
+      background: #111;
+      color: white;
+      text-decoration: none;
+      padding: 11px 18px;
+      border-radius: 999px;
+      font-size: 14px;
+    }
+
+    .hero {
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      padding: 120px 5vw 5vw;
+      background-image:
+        linear-gradient(180deg, rgba(0,0,0,.1), rgba(0,0,0,.75)),
+        url("huette.jpg");
+      background-size: cover;
+      background-position: center;
+      color: white;
+    }
+
+    .hero-content {
+      max-width: 1050px;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 8px 14px;
+      border: 1px solid rgba(255,255,255,.35);
+      border-radius: 999px;
+      margin-bottom: 22px;
+      background: rgba(255,255,255,.12);
+      backdrop-filter: blur(10px);
+      font-size: 13px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(58px, 10vw, 145px);
+      line-height: .82;
+      letter-spacing: -0.095em;
+      font-weight: 300;
+      max-width: 1000px;
+    }
+
+    .hero p {
+      max-width: 620px;
+      font-size: clamp(18px, 2vw, 25px);
+      line-height: 1.2;
+      opacity: .82;
+      letter-spacing: -0.04em;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 28px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 15px 22px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 15px;
+    }
+
+    .btn.primary {
+      background: #d8f05f;
+      color: #111;
+    }
+
+    .btn.secondary {
+      background: rgba(255,255,255,.18);
+      color: white;
+      border: 1px solid rgba(255,255,255,.28);
+    }
+
+    section {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 110px 20px;
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: .7fr 1.3fr;
+      gap: 48px;
+      margin-bottom: 36px;
+    }
+
+    .label {
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      font-size: 12px;
+      color: #285b43;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(38px, 6vw, 84px);
+      line-height: .9;
+      letter-spacing: -0.075em;
+      font-weight: 300;
+    }
+
+    .lead {
+      font-size: clamp(18px, 2.1vw, 27px);
+      line-height: 1.18;
+      color: #6f6a60;
+      letter-spacing: -0.04em;
+      margin-top: 20px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 28px;
+      padding: 26px;
+      min-height: 260px;
+      border: 1px solid rgba(0,0,0,.1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .card span {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: #e8dfcf;
+      display: grid;
+      place-items: center;
+      color: #12382a;
+      font-size: 14px;
+    }
+
+    .card h3 {
+      font-size: 31px;
+      line-height: .95;
+      letter-spacing: -0.06em;
+      font-weight: 300;
+      margin: 0 0 12px;
+    }
+
+    .card p {
+      color: #6f6a60;
+      margin: 0;
+      line-height: 1.4;
+    }
+
+    .dark {
+      max-width: none;
+      background: #12382a;
+      color: white;
+      padding: 110px max(20px, calc((100vw - 1180px) / 2));
+    }
+
+    .dark .label {
+      color: #d8f05f;
+    }
+
+    .dark .lead {
+      color: rgba(255,255,255,.72);
+    }
+
+    .process {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      border-radius: 30px;
+      overflow: hidden;
+      background: rgba(255,255,255,.18);
+      margin-top: 40px;
+    }
+
+    .step {
+      padding: 26px;
+      background: rgba(255,255,255,.08);
+      min-height: 230px;
+    }
+
+    .step span {
+      color: #d8f05f;
+      display: block;
+      margin-bottom: 70px;
+      font-size: 14px;
+    }
+
+    .step h3 {
+      margin: 0 0 10px;
+      font-size: 25px;
+      line-height: 1;
+      font-weight: 300;
+      letter-spacing: -0.05em;
+    }
+
+    .step p {
+      color: rgba(255,255,255,.68);
+      margin: 0;
+      line-height: 1.35;
+    }
+
+    .booking {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .booking-panel {
+      background: white;
+      border-radius: 34px;
+      padding: 30px;
+      border: 1px solid rgba(0,0,0,.1);
+    }
+
+    form {
+      display: grid;
+      gap: 12px;
+    }
+
+    label {
+      font-size: 13px;
+      color: #6f6a60;
+      display: grid;
+      gap: 7px;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(0,0,0,.14);
+      font-family: inherit;
+      font-weight: 300;
+      font-size: 15px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    button {
+      margin-top: 8px;
+      border: 0;
+      border-radius: 999px;
+      padding: 16px 20px;
+      background: #12382a;
+      color: white;
+      font-family: inherit;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .result {
+      margin-top: 16px;
+      padding: 16px;
+      background: #f4f2ec;
+      border-radius: 20px;
+      color: #6f6a60;
+      line-height: 1.4;
+    }
+
+    .room-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .room {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      align-items: center;
+      padding: 18px;
+      background: #f4f2ec;
+      border-radius: 22px;
+    }
+
+    .room strong {
+      font-weight: 400;
+    }
+
+    .room small {
+      color: #6f6a60;
+    }
+
+    .pill {
+      background: white;
+      color: #12382a;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    details {
+      border-top: 1px solid rgba(0,0,0,.14);
+      padding: 22px 0;
+    }
+
+    details:last-child {
+      border-bottom: 1px solid rgba(0,0,0,.14);
+    }
+
+    summary {
+      cursor: pointer;
+      font-size: 24px;
+      letter-spacing: -0.05em;
+      list-style: none;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    details p {
+      color: #6f6a60;
+      line-height: 1.45;
+      max-width: 700px;
+    }
+
+    footer {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 50px 20px 70px;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      color: #6f6a60;
+      border-top: 1px solid rgba(0,0,0,.14);
+    }
+
+    footer strong {
+      color: #111;
+      font-weight: 400;
+    }
+
+    @media (max-width: 900px) {
+      nav {
+        display: none;
+      }
+
+      .section-head,
+      .cards,
+      .process,
+      .booking {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding: 100px 20px 40px;
+      }
+
+      footer {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <a class="logo" href="#">Uni-Haus Schauinsland</a>
+
+    <nav>
+      <a href="#zielgruppen">Zielgruppen</a>
+      <a href="#ablauf">Ablauf</a>
+      <a href="#buchung">Buchung</a>
+      <a href="#raeume">Räume</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+
+    <a class="book-btn" href="#buchung">Buchen</a>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <div class="tag">Retreats · Seminare · Teambuilding</div>
+        <h1>Raus aus dem Campus. Rein in den Schwarzwald.</h1>
+        <p>
+          Das Uni-Haus Schauinsland als moderner Ort für Gruppenfahrten,
+          Seminare, Fachschaften und konzentrierte Arbeitsphasen.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn primary" href="#buchung">Verfügbarkeit prüfen</a>
+          <a class="btn secondary" href="#raeume">Haus ansehen</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="zielgruppen">
+      <div class="section-head">
+        <div class="label">Für wen?</div>
+        <div>
+          <h2>Gebaut für Gruppen, nicht für Einzelbett-Chaos.</h2>
+          <p class="lead">
+            Die Website denkt die Hütte wie ein modernes Retreat-Haus:
+            schnell verstehen, was möglich ist, direkt den passenden Aufenthalt planen.
+          </p>
+        </div>
+      </div>
+
+      <div class="cards">
+        <article class="card">
+          <span>01</span>
+          <div>
+            <h3>Studierende & Fachschaften</h3>
+            <p>Wochenenden, Projektphasen, Gruppenfahrten und selbstorganisierte Aufenthalte.</p>
+          </div>
+        </article>
+
+        <article class="card">
+          <span>02</span>
+          <div>
+            <h3>Lehre & Forschung</h3>
+            <p>Blockseminare, Klausuren, Workshops und konzentrierte Arbeitsphasen außerhalb des Campus.</p>
+          </div>
+        </article>
+
+        <article class="card">
+          <span>03</span>
+          <div>
+            <h3>Externe Gruppen</h3>
+            <p>Teambuilding, Bildungsarbeit und Retreats mit transparenter Preis- und Buchungslogik.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="dark" id="ablauf">
+      <div class="section-head">
+        <div class="label">Buchungslogik</div>
+        <div>
+          <h2>Vier Schritte statt Mail-Pingpong.</h2>
+          <p class="lead">
+            Von der Anfrage bis zum Check-out wird der Ablauf klar geführt –
+            für Nutzer:innen und Verwaltung.
+          </p>
+        </div>
+      </div>
+
+      <div class="process">
+        <article class="step">
+          <span>01</span>
+          <h3>Zeitraum wählen</h3>
+          <p>Kalender mit freien, belegten und gesperrten Zeiträumen.</p>
+        </article>
+
+        <article class="step">
+          <span>02</span>
+          <h3>Räume auswählen</h3>
+          <p>Zimmer, Seminarräume oder Kombinationen buchen.</p>
+        </article>
+
+        <article class="step">
+          <span>03</span>
+          <h3>Preis verstehen</h3>
+          <p>Automatisch nach Saison, Gruppe, Wochenende und Nutzung.</p>
+        </article>
+
+        <article class="step">
+          <span>04</span>
+          <h3>Check-in erhalten</h3>
+          <p>Bestätigung, Rechnung, Hausregeln und Schlüsselinfos per Mail.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="buchung" class="booking">
+      <div>
+        <div class="label">Buchung</div>
+        <h2>Aufenthalt anfragen.</h2>
+        <p class="lead">
+          Statischer GitHub-Prototyp mit Demo-Preislogik. Später kann das Formular
+          an ein PMS, eine Booking Engine oder ein Formular-Backend angebunden werden.
+        </p>
+      </div>
+
+      <div class="booking-panel">
+        <form id="bookingForm">
+          <div class="form-grid">
+            <label>
+              Anreise
+              <input type="date" id="startDate" required>
+            </label>
+
+            <label>
+              Abreise
+              <input type="date" id="endDate" required>
+            </label>
+          </div>
+
+          <div class="form-grid">
+            <label>
+              Personen
+              <input type="number" id="people" min="1" max="60" value="14">
+            </label>
+
+            <label>
+              Gruppe
+              <select id="groupType">
+                <option value="student">Studierende</option>
+                <option value="teacher">Uni-intern</option>
+                <option value="external">Extern</option>
+              </select>
+            </label>
+          </div>
+
+          <label>
+            Nutzung
+            <select id="usageType">
+              <option value="overnight">Übernachtung</option>
+              <option value="seminar">Seminarraum</option>
+              <option value="both">Übernachtung + Seminarraum</option>
+            </select>
+          </label>
+
+          <button type="submit">Preis grob berechnen</button>
+        </form>
+
+        <div class="result" id="resultText">
+          Wähle Daten aus. Danach erscheint hier eine erste Orientierung.
+        </div>
+      </div>
+    </section>
+
+    <section id="raeume">
+      <div class="section-head">
+        <div class="label">Haus & Räume</div>
+        <div>
+          <h2>Alles sichtbar, was buchbar ist.</h2>
+          <p class="lead">
+            Die Website sollte wie ein digitales Hausprofil funktionieren:
+            Zimmer nicht als Betten verkaufen, Seminarräume klar trennen und Ausstattung ohne Nachfragen erklären.
+          </p>
+
+          <div class="room-list">
+            <div class="room">
+              <div>
+                <strong>Mehrbettzimmer</strong><br>
+                <small>Buchung ganzer Zimmer, keine Einzelbetten</small>
+              </div>
+              <span class="pill">Übernachtung</span>
+            </div>
+
+            <div class="room">
+              <div>
+                <strong>Seminarraum</strong><br>
+                <small>Für Workshops, Lehre und Gruppenarbeit</small>
+              </div>
+              <span class="pill">separat buchbar</span>
+            </div>
+
+            <div class="room">
+              <div>
+                <strong>Gemeinschaftsbereiche</strong><br>
+                <small>Küche, Aufenthaltsraum, Außenbereich</small>
+              </div>
+              <span class="pill">inklusive</span>
+            </div>
+
+            <div class="room">
+              <div>
+                <strong>Digitale Verwaltung</strong><br>
+                <small>Kalender, Rechnungen, E-Mails, Storno</small>
+              </div>
+              <span class="pill">Backend</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="section-head">
+        <div class="label">FAQ</div>
+        <div>
+          <h2>Weniger Rückfragen. Mehr Klarheit.</h2>
+
+          <details open>
+            <summary>Kann man einzelne Betten buchen?</summary>
+            <p>Nein. Die Buchungslogik sollte auf ganzen Zimmern oder ganzen Nutzungseinheiten basieren.</p>
+          </details>
+
+          <details>
+            <summary>Können Seminarräume einzeln gebucht werden?</summary>
+            <p>Ja. Seminarräume können unabhängig oder zusammen mit Übernachtungen angefragt werden.</p>
+          </details>
+
+          <details>
+            <summary>Welche rechtlichen Seiten braucht die Website?</summary>
+            <p>Impressum, Datenschutz, AGB, Hausordnung, Stornobedingungen, Cookie-Consent und Hinweise zur Zahlungsabwicklung.</p>
+          </details>
+
+          <details>
+            <summary>Was muss im Admin-Bereich möglich sein?</summary>
+            <p>Kalender bearbeiten, Buchungen sperren, Preise anpassen, Rechnungen exportieren, E-Mails automatisieren und Buchungen verwalten.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div>
+      <strong>Uni-Haus Schauinsland</strong><br>
+      Buchungsportal · Retreat-Haus · Universität Freiburg
+    </div>
+    <div>
+      Impressum · Datenschutz · AGB · Hausordnung
+    </div>
+  </footer>
+
+  <script>
+    const form = document.querySelector("#bookingForm");
+    const result = document.querySelector("#resultText");
+
+    function nightsBetween(start, end) {
+      const ms = 24 * 60 * 60 * 1000;
+      return Math.max(1, Math.round((end - start) / ms));
+    }
+
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const start = new Date(document.querySelector("#startDate").value);
+      const end = new Date(document.querySelector("#endDate").value);
+      const people = Number(document.querySelector("#people").value);
+      const group = document.querySelector("#groupType").value;
+      const usage = document.querySelector("#usageType").value;
+
+      if (!start || !end || end <= start) {
+        result.textContent = "Bitte wähle ein gültiges An- und Abreisedatum.";
+        return;
+      }
+
+      const nights = nightsBetween(start, end);
+      const rates = {
+        student: 18,
+        teacher: 28,
+        external: 44
+      };
+
+      const labels = {
+        student: "Studierende",
+        teacher: "Uni-intern",
+        external: "Extern"
+      };
+
+      let price = nights * people * rates[group];
+
+      if (usage === "seminar") price = nights * 160;
+      if (usage === "both") price += nights * 120;
+
+      result.innerHTML =
+        "<strong>" + nights + " Nacht/Nächte · " + people + " Personen · " + labels[group] + "</strong><br>" +
+        "Grobe Demo-Rechnung: ca. <strong>" + price.toLocaleString("de-DE") + " €</strong><br><br>" +
+        "Für echte Buchungen müssten Kalender, PMS, Zahlungsanbieter und Stornoregeln angebunden werden.";
+    });
+  </script>
+</body>
+</html>
