@@ -4,86 +4,966 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Uni-Hütte Schauinsland</title>
+<title>Uni-Haus Schauinsland</title>
 
 <style>
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
 
 body{
-    margin:0;
-    font-family:"Helvetica Neue",Helvetica,sans-serif;
+  margin:0;
+  font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight:300;
+  background:#f4f1ea;
+  color:#111;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+header{
+  position:fixed;
+  top:18px;
+  left:50%;
+  transform:translateX(-50%);
+  width:calc(100% - 32px);
+  max-width:1180px;
+  z-index:100;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:10px 12px 10px 20px;
+  border-radius:999px;
+  background:rgba(255,255,255,.72);
+  backdrop-filter:blur(22px);
+  box-shadow:0 20px 60px rgba(0,0,0,.12);
+}
+
+.logo{
+  font-size:16px;
+  letter-spacing:-.04em;
+}
+
+nav{
+  display:flex;
+  gap:24px;
+  font-size:14px;
+  color:rgba(0,0,0,.65);
+}
+
+.nav-button{
+  background:#111;
+  color:white;
+  padding:12px 18px;
+  border-radius:999px;
+  font-size:14px;
 }
 
 .hero{
-    height:100vh;
-
-    background:
-    linear-gradient(
-    rgba(0,0,0,.35),
-    rgba(0,0,0,.55)
-    ),
+  min-height:100vh;
+  position:relative;
+  display:flex;
+  align-items:flex-end;
+  padding:130px 5vw 5vw;
+  color:white;
+  background:
+    linear-gradient(180deg, rgba(0,0,0,.12), rgba(0,0,0,.82)),
+    linear-gradient(90deg, rgba(0,0,0,.55), rgba(0,0,0,.05)),
     url("Uni-Haus_Schauinsland");
-
-    background-size:cover;
-    background-position:center;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    color:white;
-    text-align:center;
+  background-size:cover;
+  background-position:center;
 }
 
-.hero h1{
-    font-size:6vw;
-    font-weight:300;
-    letter-spacing:-0.08em;
-    margin:0;
+.hero-content{
+  max-width:1150px;
+}
+
+.tag{
+  display:inline-block;
+  padding:9px 14px;
+  border:1px solid rgba(255,255,255,.35);
+  border-radius:999px;
+  background:rgba(255,255,255,.12);
+  backdrop-filter:blur(12px);
+  margin-bottom:24px;
+  font-size:14px;
+}
+
+h1{
+  margin:0;
+  max-width:1100px;
+  font-size:clamp(58px,10vw,145px);
+  line-height:.82;
+  letter-spacing:-.095em;
+  font-weight:300;
 }
 
 .hero p{
-    font-size:1.4rem;
-    opacity:.9;
+  max-width:650px;
+  font-size:clamp(18px,2vw,25px);
+  line-height:1.2;
+  opacity:.85;
+  letter-spacing:-.04em;
 }
 
-.button{
-    display:inline-block;
-    margin-top:20px;
-    background:white;
-    color:black;
-    padding:14px 24px;
-    border-radius:999px;
-    text-decoration:none;
+.hero-actions{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:30px;
 }
 
+.btn{
+  display:inline-block;
+  padding:15px 24px;
+  border-radius:999px;
+  font-size:15px;
+}
+
+.btn.primary{
+  background:#d8f05f;
+  color:#111;
+}
+
+.btn.secondary{
+  background:rgba(255,255,255,.18);
+  border:1px solid rgba(255,255,255,.3);
+  color:white;
+}
+
+.stats{
+  max-width:1180px;
+  margin:-55px auto 0;
+  position:relative;
+  z-index:3;
+  padding:0 20px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+}
+
+.stat{
+  background:white;
+  border-radius:28px;
+  padding:28px;
+  box-shadow:0 20px 60px rgba(0,0,0,.1);
+}
+
+.stat strong{
+  display:block;
+  font-size:46px;
+  font-weight:300;
+  letter-spacing:-.08em;
+}
+
+.stat span{
+  color:#6f6a60;
+}
+
+section{
+  max-width:1180px;
+  margin:0 auto;
+  padding:120px 20px;
+}
+
+.section-head{
+  display:grid;
+  grid-template-columns:.7fr 1.3fr;
+  gap:50px;
+  margin-bottom:40px;
+}
+
+.label{
+  text-transform:uppercase;
+  letter-spacing:.13em;
+  font-size:12px;
+  color:#285b43;
+}
+
+h2{
+  margin:0;
+  font-size:clamp(40px,6vw,88px);
+  line-height:.9;
+  letter-spacing:-.08em;
+  font-weight:300;
+}
+
+.lead{
+  max-width:800px;
+  color:#6f6a60;
+  font-size:clamp(18px,2.1vw,27px);
+  line-height:1.18;
+  letter-spacing:-.04em;
+}
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+}
+
+.card{
+  background:white;
+  border-radius:30px;
+  padding:28px;
+  min-height:270px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  border:1px solid rgba(0,0,0,.08);
+  transition:.25s ease;
+}
+
+.card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 25px 70px rgba(0,0,0,.11);
+}
+
+.number{
+  width:44px;
+  height:44px;
+  border-radius:50%;
+  background:#e8dfcf;
+  color:#12382a;
+  display:grid;
+  place-items:center;
+  font-size:14px;
+}
+
+.card h3{
+  margin:0 0 12px;
+  font-size:32px;
+  line-height:.95;
+  letter-spacing:-.06em;
+  font-weight:300;
+}
+
+.card p{
+  margin:0;
+  color:#6f6a60;
+  line-height:1.4;
+}
+
+.dark{
+  max-width:none;
+  background:#12382a;
+  color:white;
+  padding:120px max(20px, calc((100vw - 1180px) / 2));
+}
+
+.dark .label{
+  color:#d8f05f;
+}
+
+.dark .lead{
+  color:rgba(255,255,255,.72);
+}
+
+.process{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:1px;
+  border-radius:32px;
+  overflow:hidden;
+  background:rgba(255,255,255,.18);
+}
+
+.step{
+  min-height:240px;
+  padding:28px;
+  background:rgba(255,255,255,.08);
+}
+
+.step span{
+  display:block;
+  color:#d8f05f;
+  margin-bottom:75px;
+  font-size:14px;
+}
+
+.step h3{
+  margin:0 0 10px;
+  font-size:26px;
+  line-height:1;
+  font-weight:300;
+  letter-spacing:-.05em;
+}
+
+.step p{
+  margin:0;
+  color:rgba(255,255,255,.68);
+  line-height:1.35;
+}
+
+.split{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+  align-items:start;
+}
+
+.image-box{
+  min-height:650px;
+  border-radius:38px;
+  background:
+    linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.25)),
+    url("Uni-Haus_Schauinsland");
+  background-size:cover;
+  background-position:center;
+  position:sticky;
+  top:110px;
+}
+
+.info-box{
+  background:white;
+  border-radius:38px;
+  padding:36px;
+  border:1px solid rgba(0,0,0,.08);
+}
+
+.room-list{
+  display:grid;
+  gap:12px;
+  margin-top:30px;
+}
+
+.room{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:16px;
+  align-items:center;
+  background:#f4f1ea;
+  border-radius:22px;
+  padding:18px;
+}
+
+.room strong{
+  font-weight:400;
+}
+
+.room small{
+  color:#6f6a60;
+}
+
+.pill{
+  background:white;
+  color:#12382a;
+  border-radius:999px;
+  padding:9px 12px;
+  font-size:13px;
+  white-space:nowrap;
+}
+
+.booking{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+  align-items:start;
+}
+
+.booking-panel{
+  background:white;
+  border-radius:36px;
+  padding:32px;
+  border:1px solid rgba(0,0,0,.08);
+}
+
+form{
+  display:grid;
+  gap:12px;
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+label{
+  display:grid;
+  gap:7px;
+  color:#6f6a60;
+  font-size:13px;
+}
+
+input,select{
+  width:100%;
+  padding:14px;
+  border-radius:16px;
+  border:1px solid rgba(0,0,0,.14);
+  font:inherit;
+  font-weight:300;
+}
+
+button{
+  border:0;
+  border-radius:999px;
+  padding:16px 22px;
+  background:#12382a;
+  color:white;
+  font:inherit;
+  cursor:pointer;
+  margin-top:8px;
+}
+
+.result{
+  margin-top:16px;
+  padding:16px;
+  border-radius:22px;
+  background:#f4f1ea;
+  color:#6f6a60;
+  line-height:1.4;
+}
+
+.pricing{
+  display:grid;
+  grid-template-columns:1.2fr .8fr;
+  gap:14px;
+}
+
+.price-card{
+  background:white;
+  border-radius:32px;
+  padding:30px;
+  border:1px solid rgba(0,0,0,.08);
+}
+
+.price-card.black{
+  background:#111;
+  color:white;
+}
+
+.price-card h3{
+  margin:0 0 20px;
+  font-size:32px;
+  font-weight:300;
+  letter-spacing:-.06em;
+}
+
+.price-card ul{
+  list-style:none;
+  padding:0;
+  margin:0;
+  display:grid;
+  gap:13px;
+  color:#6f6a60;
+}
+
+.price-card.black ul{
+  color:rgba(255,255,255,.7);
+}
+
+.faq-grid{
+  display:grid;
+  grid-template-columns:.7fr 1.3fr;
+  gap:40px;
+}
+
+details{
+  border-top:1px solid rgba(0,0,0,.14);
+  padding:24px 0;
+}
+
+details:last-child{
+  border-bottom:1px solid rgba(0,0,0,.14);
+}
+
+summary{
+  cursor:pointer;
+  list-style:none;
+  font-size:25px;
+  letter-spacing:-.05em;
+}
+
+summary::-webkit-details-marker{
+  display:none;
+}
+
+details p{
+  color:#6f6a60;
+  line-height:1.45;
+  max-width:720px;
+}
+
+footer{
+  max-width:1180px;
+  margin:0 auto;
+  padding:55px 20px 75px;
+  display:flex;
+  justify-content:space-between;
+  gap:24px;
+  border-top:1px solid rgba(0,0,0,.14);
+  color:#6f6a60;
+}
+
+footer strong{
+  color:#111;
+  font-weight:400;
+}
+
+@media(max-width:900px){
+  nav{
+    display:none;
+  }
+
+  .hero{
+    padding:110px 20px 45px;
+  }
+
+  .stats,
+  .cards,
+  .process,
+  .split,
+  .booking,
+  .pricing,
+  .section-head,
+  .faq-grid{
+    grid-template-columns:1fr;
+  }
+
+  .stats{
+    margin:20px auto 0;
+  }
+
+  section{
+    padding:85px 20px;
+  }
+
+  .dark{
+    padding:85px 20px;
+  }
+
+  .image-box{
+    min-height:380px;
+    position:relative;
+    top:auto;
+  }
+
+  footer{
+    flex-direction:column;
+  }
+
+  h1{
+    font-size:64px;
+  }
+}
 </style>
-
 </head>
 
 <body>
 
+<header>
+  <a class="logo" href="#">Uni-Haus Schauinsland</a>
+
+  <nav>
+    <a href="#zielgruppen">Zielgruppen</a>
+    <a href="#ablauf">Ablauf</a>
+    <a href="#raeume">Räume</a>
+    <a href="#buchung">Buchung</a>
+    <a href="#faq">FAQ</a>
+  </nav>
+
+  <a class="nav-button" href="#buchung">Buchen</a>
+</header>
+
+<main>
+
 <section class="hero">
+  <div class="hero-content">
+    <div class="tag">Retreats · Seminare · Teambuilding</div>
 
-<div>
+    <h1>Raus aus dem Campus. Rein in den Schwarzwald.</h1>
 
-<p>Universität Freiburg · Schwarzwald</p>
+    <p>
+      Das Uni-Haus Schauinsland als moderner Ort für Gruppenfahrten,
+      Seminare, Fachschaften und konzentrierte Arbeitsphasen.
+    </p>
 
-<h1>
-Raus aus dem Campus.<br>
-Rein in den Schwarzwald.
-</h1>
+    <div class="hero-actions">
+      <a class="btn primary" href="#buchung">Verfügbarkeit prüfen</a>
+      <a class="btn secondary" href="#raeume">Haus ansehen</a>
+    </div>
+  </div>
+</section>
 
-<p>
-Seminare · Gruppenfahrten · Retreats
-</p>
-
-<a class="button" href="#">
-Jetzt buchen
-</a>
-
+<div class="stats">
+  <div class="stat">
+    <strong>01</strong>
+    <span>Haus für Gruppen, Seminare und Aufenthalte</span>
+  </div>
+  <div class="stat">
+    <strong>24/7</strong>
+    <span>Digitale Anfrage, Kalender und Check-in-Informationen</span>
+  </div>
+  <div class="stat">
+    <strong>100%</strong>
+    <span>Klarer Ablauf für Gäste und Verwaltung</span>
+  </div>
 </div>
 
+<section id="zielgruppen">
+  <div class="section-head">
+    <div class="label">Für wen?</div>
+    <div>
+      <h2>Gebaut für Gruppen, nicht für Einzelbett-Chaos.</h2>
+      <p class="lead">
+        Die Website denkt die Hütte wie ein modernes Retreat-Haus:
+        schnell verstehen, was möglich ist, direkt den passenden Aufenthalt planen.
+      </p>
+    </div>
+  </div>
+
+  <div class="cards">
+    <article class="card">
+      <span class="number">01</span>
+      <div>
+        <h3>Studierende & Fachschaften</h3>
+        <p>Wochenenden, Projektphasen, Gruppenfahrten und selbstorganisierte Aufenthalte.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <span class="number">02</span>
+      <div>
+        <h3>Lehre & Forschung</h3>
+        <p>Blockseminare, Workshops und konzentrierte Arbeitsphasen außerhalb des Campus.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <span class="number">03</span>
+      <div>
+        <h3>Externe Gruppen</h3>
+        <p>Teambuilding, Bildungsarbeit und Retreats mit transparenter Buchungslogik.</p>
+      </div>
+    </article>
+  </div>
 </section>
+
+<section class="dark" id="ablauf">
+  <div class="section-head">
+    <div class="label">Buchungslogik</div>
+    <div>
+      <h2>Vier Schritte statt Mail-Pingpong.</h2>
+      <p class="lead">
+        Von der Anfrage bis zum Check-out wird der Ablauf klar geführt –
+        für Nutzer:innen und Verwaltung.
+      </p>
+    </div>
+  </div>
+
+  <div class="process">
+    <article class="step">
+      <span>01</span>
+      <h3>Zeitraum wählen</h3>
+      <p>Kalender mit freien, belegten und gesperrten Zeiträumen.</p>
+    </article>
+
+    <article class="step">
+      <span>02</span>
+      <h3>Räume auswählen</h3>
+      <p>Zimmer, Seminarräume oder Kombinationen buchen.</p>
+    </article>
+
+    <article class="step">
+      <span>03</span>
+      <h3>Preis verstehen</h3>
+      <p>Automatisch nach Saison, Gruppe, Wochenende und Nutzung.</p>
+    </article>
+
+    <article class="step">
+      <span>04</span>
+      <h3>Check-in erhalten</h3>
+      <p>Bestätigung, Rechnung, Hausregeln und Schlüsselinfos per Mail.</p>
+    </article>
+  </div>
+</section>
+
+<section id="raeume" class="split">
+  <div class="image-box"></div>
+
+  <div class="info-box">
+    <div class="label">Haus & Räume</div>
+    <h2>Alles sichtbar, was buchbar ist.</h2>
+    <p class="lead">
+      Die Website funktioniert wie ein digitales Hausprofil:
+      Zimmer nicht als Betten verkaufen, Seminarräume klar trennen
+      und Ausstattung ohne Nachfragen erklären.
+    </p>
+
+    <div class="room-list">
+      <div class="room">
+        <div>
+          <strong>Mehrbettzimmer</strong><br>
+          <small>Buchung ganzer Zimmer, keine Einzelbetten</small>
+        </div>
+        <span class="pill">Übernachtung</span>
+      </div>
+
+      <div class="room">
+        <div>
+          <strong>Seminarraum</strong><br>
+          <small>Für Workshops, Lehre und Gruppenarbeit</small>
+        </div>
+        <span class="pill">separat buchbar</span>
+      </div>
+
+      <div class="room">
+        <div>
+          <strong>Gemeinschaftsbereiche</strong><br>
+          <small>Küche, Aufenthaltsraum und Außenbereich</small>
+        </div>
+        <span class="pill">inklusive</span>
+      </div>
+
+      <div class="room">
+        <div>
+          <strong>Digitale Verwaltung</strong><br>
+          <small>Kalender, Rechnungen, E-Mails und Storno</small>
+        </div>
+        <span class="pill">Backend</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="buchung" class="booking">
+  <div>
+    <div class="label">Buchung</div>
+    <h2>Aufenthalt anfragen.</h2>
+    <p class="lead">
+      Statischer GitHub-Prototyp mit Demo-Preislogik.
+      Später kann das Formular an ein PMS, eine Booking Engine
+      oder ein Formular-Backend angebunden werden.
+    </p>
+  </div>
+
+  <div class="booking-panel">
+    <form id="bookingForm">
+      <div class="form-grid">
+        <label>
+          Anreise
+          <input type="date" id="startDate" required>
+        </label>
+
+        <label>
+          Abreise
+          <input type="date" id="endDate" required>
+        </label>
+      </div>
+
+      <div class="form-grid">
+        <label>
+          Personen
+          <input type="number" id="people" min="1" max="60" value="14">
+        </label>
+
+        <label>
+          Gruppe
+          <select id="groupType">
+            <option value="student">Studierende</option>
+            <option value="teacher">Uni-intern</option>
+            <option value="external">Extern</option>
+          </select>
+        </label>
+      </div>
+
+      <label>
+        Nutzung
+        <select id="usageType">
+          <option value="overnight">Übernachtung</option>
+          <option value="seminar">Seminarraum</option>
+          <option value="both">Übernachtung + Seminarraum</option>
+        </select>
+      </label>
+
+      <button type="submit">Preis grob berechnen</button>
+    </form>
+
+    <div class="result" id="resultText">
+      Wähle Daten aus. Danach erscheint hier eine erste Orientierung.
+    </div>
+  </div>
+</section>
+
+<section id="preise">
+  <div class="section-head">
+    <div class="label">Preislogik</div>
+    <div>
+      <h2>Transparent, fair und automatisierbar.</h2>
+      <p class="lead">
+        Nutzer:innen sollen sofort verstehen, wovon der Preis abhängt:
+        Zeitraum, Gruppe, Nutzung und Stornoregeln.
+      </p>
+    </div>
+  </div>
+
+  <div class="pricing">
+    <article class="price-card black">
+      <h3>Variablen</h3>
+      <ul>
+        <li>Haupt- und Nebensaison</li>
+        <li>Wochenende, Wochentage und Feiertage</li>
+        <li>Studierende, Lehrende und Externe</li>
+        <li>Zimmer, Seminarraum oder Kombination</li>
+        <li>Rückerstattung, Storno und No-Show</li>
+      </ul>
+    </article>
+
+    <article class="price-card">
+      <h3>Zahlung</h3>
+      <ul>
+        <li>Kreditkarte oder Sofortzahlung</li>
+        <li>Rechnung mit Anzahlung</li>
+        <li>PayPal optional</li>
+        <li>DSGVO-konforme Speicherung</li>
+        <li>PCI-konforme Zahlungsabwicklung</li>
+      </ul>
+    </article>
+  </div>
+</section>
+
+<section>
+  <div class="section-head">
+    <div class="label">Mobilität</div>
+    <div>
+      <h2>Anreise als Teil des Konzepts.</h2>
+      <p class="lead">
+        ÖPNV, Fahrrad, E-Bike, Shuttle und Fahrgemeinschaften werden
+        direkt mitgedacht – nicht als Fußnote, sondern als eigener Planungsbereich.
+      </p>
+    </div>
+  </div>
+
+  <div class="cards">
+    <article class="card">
+      <span class="number">ÖPNV</span>
+      <div>
+        <h3>Bus & Bahn</h3>
+        <p>Klare Route, letzte Verbindung, Gruppenhinweise und Haltestelleninfo.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <span class="number">Bike</span>
+      <div>
+        <h3>E-Bike & Fahrrad</h3>
+        <p>Für sportliche Gruppen mit Höhenmeter-Hinweis und Abstellmöglichkeiten.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <span class="number">Mix</span>
+      <div>
+        <h3>Shuttle</h3>
+        <p>Optional für Gepäck, Abendankunft oder schlechte ÖPNV-Zeiten.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="faq" class="faq-grid">
+  <div>
+    <div class="label">FAQ</div>
+    <h2>Weniger Rückfragen. Mehr Klarheit.</h2>
+  </div>
+
+  <div>
+    <details open>
+      <summary>Kann man einzelne Betten buchen?</summary>
+      <p>Nein. Die Buchungslogik sollte auf ganzen Zimmern oder ganzen Nutzungseinheiten basieren.</p>
+    </details>
+
+    <details>
+      <summary>Können Seminarräume einzeln gebucht werden?</summary>
+      <p>Ja. Seminarräume können unabhängig oder zusammen mit Übernachtungen angefragt werden.</p>
+    </details>
+
+    <details>
+      <summary>Welche rechtlichen Seiten braucht die Website?</summary>
+      <p>Impressum, Datenschutz, AGB, Hausordnung, Stornobedingungen, Cookie-Consent und Hinweise zur Zahlungsabwicklung.</p>
+    </details>
+
+    <details>
+      <summary>Was muss im Admin-Bereich möglich sein?</summary>
+      <p>Kalender bearbeiten, Buchungen sperren, Preise anpassen, Rechnungen exportieren, E-Mails automatisieren und Buchungen verwalten.</p>
+    </details>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div>
+    <strong>Uni-Haus Schauinsland</strong><br>
+    Buchungsportal · Retreat-Haus · Universität Freiburg
+  </div>
+
+  <div>
+    Impressum · Datenschutz · AGB · Hausordnung
+  </div>
+</footer>
+
+<script>
+const form = document.querySelector("#bookingForm");
+const result = document.querySelector("#resultText");
+
+function nightsBetween(start, end){
+  const ms = 24 * 60 * 60 * 1000;
+  return Math.max(1, Math.round((end - start) / ms));
+}
+
+form.addEventListener("submit", function(e){
+  e.preventDefault();
+
+  const start = new Date(document.querySelector("#startDate").value);
+  const end = new Date(document.querySelector("#endDate").value);
+  const people = Number(document.querySelector("#people").value);
+  const group = document.querySelector("#groupType").value;
+  const usage = document.querySelector("#usageType").value;
+
+  if(!start || !end || end <= start){
+    result.textContent = "Bitte wähle ein gültiges An- und Abreisedatum.";
+    return;
+  }
+
+  const nights = nightsBetween(start, end);
+
+  const rates = {
+    student:18,
+    teacher:28,
+    external:44
+  };
+
+  const labels = {
+    student:"Studierende",
+    teacher:"Uni-intern",
+    external:"Extern"
+  };
+
+  let price = nights * people * rates[group];
+
+  if(usage === "seminar"){
+    price = nights * 160;
+  }
+
+  if(usage === "both"){
+    price += nights * 120;
+  }
+
+  result.innerHTML =
+    "<strong>" + nights + " Nacht/Nächte · " + people + " Personen · " + labels[group] + "</strong><br>" +
+    "Grobe Demo-Rechnung: ca. <strong>" + price.toLocaleString("de-DE") + " €</strong><br><br>" +
+    "Für echte Buchungen müssten Kalender, PMS, Zahlungsanbieter und Stornoregeln angebunden werden.";
+});
+</script>
 
 </body>
 </html>
