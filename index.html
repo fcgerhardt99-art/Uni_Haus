@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Uni-Hütte Schauinsland – Buchung & Aufenthalt</title>
+  <meta name="description" content="Buchungsportal und Informationsseite für die Uni-Hütte Schauinsland: Zimmer, Seminarräume, Preise, Anreise und Aufenthalt." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a class="logo" href="#top">Uni-Hütte</a>
+    <nav>
+      <a href="#haus">Haus</a>
+      <a href="#buchen">Buchen</a>
+      <a href="#preise">Preise</a>
+      <a href="#anreise">Anreise</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a class="nav-cta" href="#buchen">Jetzt buchen</a>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <p class="eyebrow">Universität Freiburg · Schwarzwald</p>
+        <h1>Raum für Seminare, Gruppenfahrten und Auszeiten.</h1>
+        <p>Die Uni-Hütte als digitales Buchungsportal: Verfügbarkeit prüfen, Zimmer oder Seminarräume auswählen und Anfrage direkt abschicken.</p>
+        <div class="hero-buttons">
+          <a class="button primary" href="#buchen">Verfügbarkeit prüfen</a>
+          <a class="button secondary" href="#haus">Haus entdecken</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section intro">
+      <div>
+        <p class="eyebrow">Für wen?</p>
+        <h2>Ein Haus für Universität, Lehre und Gruppen.</h2>
+      </div>
+      <div class="cards three">
+        <article class="card">
+          <h3>Studierende</h3>
+          <p>Fachschaften, Projektgruppen, Wochenenden, Exkursionen und gemeinsame Arbeitsphasen.</p>
+        </article>
+        <article class="card">
+          <h3>Lehrende</h3>
+          <p>Blockseminare, Workshops, Retreats und konzentrierte Arbeit außerhalb des Campus.</p>
+        </article>
+        <article class="card">
+          <h3>Externe Gruppen</h3>
+          <p>Bildungsträger, Vereine und Partnerorganisationen mit klarer Preislogik und Buchungsregeln.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section split" id="haus">
+      <div>
+        <p class="eyebrow">Haus & Räume</p>
+        <h2>Zimmer, Seminarräume und Gemeinschaftsbereiche klar dargestellt.</h2>
+        <p>Die Website erklärt nicht nur das Haus, sondern hilft Nutzer:innen direkt zu verstehen, was buchbar ist.</p>
+      </div>
+      <div class="feature-list">
+        <div><strong>Zimmerbuchung</strong><span>Ganze Zimmer statt einzelne Betten.</span></div>
+        <div><strong>Seminarräume</strong><span>Einzeln oder zusammen mit Übernachtung buchbar.</span></div>
+        <div><strong>Ausstattung</strong><span>Küche, Aufenthaltsräume, Technik, WLAN und Außenbereich.</span></div>
+        <div><strong>Regeln</strong><span>Check-in, Reinigung, Müll, Ruhezeiten und Sicherheit transparent erklärt.</span></div>
+      </div>
+    </section>
+
+    <section class="section booking" id="buchen">
+      <div class="section-title">
+        <p class="eyebrow">Buchung</p>
+        <h2>Verfügbarkeit prüfen</h2>
+        <p>Dies ist ein statischer Prototyp. Für GitHub Pages funktioniert das Formular als Frontend. Später kann es mit Booking Engine, PMS oder Formular-Backend verbunden werden.</p>
+      </div>
+
+      <div class="booking-grid">
+        <form class="booking-form" id="bookingForm">
+          <label>
+            Anreise
+            <input type="date" id="startDate" required>
+          </label>
+          <label>
+            Abreise
+            <input type="date" id="endDate" required>
+          </label>
+          <label>
+            Nutzer:innengruppe
+            <select id="groupType">
+              <option value="student">Studierende</option>
+              <option value="teacher">Lehrende / Uni-intern</option>
+              <option value="external">Externe Gruppe</option>
+            </select>
+          </label>
+          <label>
+            Nutzung
+            <select id="usageType">
+              <option value="overnight">Übernachtung</option>
+              <option value="seminar">Seminarraum</option>
+              <option value="both">Übernachtung + Seminarraum</option>
+            </select>
+          </label>
+          <label>
+            Personen
+            <input type="number" id="people" min="1" max="50" value="12">
+          </label>
+          <label>
+            Zahlungsart
+            <select>
+              <option>Kreditkarte / Sofortzahlung</option>
+              <option>Rechnung mit Anzahlung</option>
+              <option>PayPal</option>
+            </select>
+          </label>
+          <button class="button primary full" type="submit">Preis grob berechnen</button>
+        </form>
+
+        <aside class="booking-result">
+          <h3>Vorläufige Übersicht</h3>
+          <p id="resultText">Wähle deine Daten aus, um eine grobe Preislogik zu sehen.</p>
+          <ul>
+            <li>Haupt- und Nebensaison möglich</li>
+            <li>Wochenende / Wochentage unterscheidbar</li>
+            <li>Storno- und No-Show-Gebühren integrierbar</li>
+            <li>Kalender- und PMS-Anbindung später möglich</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="preise">
+      <div class="section-title">
+        <p class="eyebrow">Preislogik</p>
+        <h2>Ein System, mehrere Gruppen.</h2>
+      </div>
+      <div class="cards four">
+        <article class="card"><h3>Saison</h3><p>Hauptsaison, Nebensaison, Feiertage und Blockseminarzeiten.</p></article>
+        <article class="card"><h3>Nutzung</h3><p>Übernachtung, Seminarraum, Tagesnutzung oder Kombination.</p></article>
+        <article class="card"><h3>Gruppe</h3><p>Unterschiedliche Preise für Studierende, Lehrende und Externe.</p></article>
+        <article class="card"><h3>Storno</h3><p>Rückerstattung, No-Show-Gebühr und faire Nachrücklogik.</p></article>
+      </div>
+    </section>
+
+    <section class="section split" id="anreise">
+      <div>
+        <p class="eyebrow">Mobilität</p>
+        <h2>Nachhaltig und verständlich zur Hütte kommen.</h2>
+        <p>Die Anreise-Seite sollte ÖPNV, Fahrrad, E-Bike, Shuttle, Parken und letzte Wege klar erklären.</p>
+      </div>
+      <div class="route-box">
+        <h3>Anreiseoptionen</h3>
+        <ol>
+          <li>ÖPNV bis Talstation / nächster Halt</li>
+          <li>Shuttle oder Fahrgemeinschaft für die letzte Strecke</li>
+          <li>Fahrrad / E-Bike für sportliche Gruppen</li>
+          <li>Parkplätze nur begrenzt und nach Regelung</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section rules">
+      <div class="section-title">
+        <p class="eyebrow">Ablauf</p>
+        <h2>Alles, was vor Ort wichtig ist.</h2>
+      </div>
+      <div class="timeline">
+        <div><span>1</span><h3>Buchen</h3><p>Zeitraum wählen, Gruppe angeben, Anfrage abschicken.</p></div>
+        <div><span>2</span><h3>Bestätigung</h3><p>Automatische Mail, Rechnung, Anzahlung und Kalenderblockung.</p></div>
+        <div><span>3</span><h3>Check-in</h3><p>Digitale Infos, Schlüsselbox oder persönlicher Zugang.</p></div>
+        <div><span>4</span><h3>Abreise</h3><p>Reinigung, Müll, Check-out und Feedback.</p></div>
+      </div>
+    </section>
+
+    <section class="section faq" id="faq">
+      <div class="section-title">
+        <p class="eyebrow">FAQ</p>
+        <h2>Häufige Fragen</h2>
+      </div>
+      <details open>
+        <summary>Kann man einzelne Betten buchen?</summary>
+        <p>Nein, vorgesehen ist die Buchung ganzer Zimmer oder größerer Nutzungseinheiten.</p>
+      </details>
+      <details>
+        <summary>Können Seminarräume einzeln gebucht werden?</summary>
+        <p>Ja, Seminarräume können einzeln oder zusammen mit Übernachtungen angefragt werden.</p>
+      </details>
+      <details>
+        <summary>Welche Zahlungsarten sind möglich?</summary>
+        <p>Kreditkarte, Sofortzahlung, Rechnung mit Anzahlung und PayPal können vorgesehen werden.</p>
+      </details>
+      <details>
+        <summary>Was passiert bei Stornierung?</summary>
+        <p>Die Website sollte klare Stornofristen, Rückerstattungen und No-Show-Gebühren anzeigen.</p>
+      </details>
+    </section>
+  </main>
+
+  <footer>
+    <div>
+      <strong>Uni-Hütte Schauinsland</strong>
+      <p>Buchungsportal · Marketingseite · Verwaltung</p>
+    </div>
+    <div class="footer-links">
+      <a href="#">Impressum</a>
+      <a href="#">Datenschutz</a>
+      <a href="#">AGB</a>
+      <a href="#">Hausordnung</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
