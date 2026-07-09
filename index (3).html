@@ -1,0 +1,2388 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Uni-Haus Schauinsland</title>
+
+<style>
+*{box-sizing:border-box}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-weight:300;
+  background:#f4f1ea;
+  color:#111;
+  overflow-x:hidden;
+}
+
+a{text-decoration:none;color:inherit}
+
+/* ---------- routing ---------- */
+.page{display:none}
+.page.active{display:block}
+
+header{
+  position:fixed;
+  top:24px;
+  left:50%;
+  transform:translateX(-50%);
+  width:calc(100% - 64px);
+  z-index:60;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:14px 16px 14px 24px;
+  border-radius:999px;
+  background:rgba(255,255,255,.68);
+  backdrop-filter:blur(28px);
+  box-shadow:0 24px 80px rgba(0,0,0,.13);
+}
+
+.logo{
+  font-size:15px;
+  letter-spacing:-.04em;
+  cursor:pointer;
+}
+
+nav{
+  display:flex;
+  gap:30px;
+  font-size:14px;
+  color:rgba(0,0,0,.6);
+}
+
+nav a{cursor:pointer;transition:color .2s ease}
+nav a:hover{color:#111}
+nav a.active{color:#12382a;font-weight:400}
+
+.nav-button{
+  background:#111;
+  color:white;
+  padding:13px 21px;
+  border-radius:999px;
+  font-size:14px;
+  border:0;
+  font-family:inherit;
+  font-weight:300;
+  cursor:pointer;
+}
+
+/* ---------- stepper (booking pages) ---------- */
+.stepper-wrap{
+  position:fixed;
+  top:106px;               /* sitzt sauber UNTER dem Header (Header endet bei ~95px) */
+  left:50%;
+  transform:translateX(-50%);
+  width:calc(100% - 64px);
+  max-width:1100px;
+  z-index:40;
+  display:none;
+}
+
+.stepper-wrap.active{display:block}
+
+.stepper{
+  background:#12382a;
+  border-radius:999px;
+  padding:12px 20px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  color:white;
+  font-size:13px;
+  flex-wrap:wrap;
+  box-shadow:0 14px 40px rgba(18,56,42,.28);
+}
+
+.stepper .crumb{
+  opacity:.62;
+  cursor:pointer;
+  padding:4px 10px;
+  border-radius:999px;
+  transition:opacity .2s ease, background .2s ease;
+}
+
+.stepper .crumb:hover{opacity:1}
+.stepper .crumb.done{opacity:.9}
+.stepper .crumb.current{
+  opacity:1;
+  color:#12382a;
+  background:#d8f05f;
+  font-weight:400;
+  cursor:default;
+}
+.stepper .sep{opacity:.35}
+.stepper .home-link{
+  opacity:.75;
+  cursor:pointer;
+  margin-right:4px;
+  padding-right:14px;
+  border-right:1px solid rgba(255,255,255,.25);
+  border-radius:0;
+}
+
+.hero{
+  min-height:100vh;
+  width:100%;
+  display:flex;
+  align-items:flex-end;
+  padding:150px 7vw 7vw;
+  color:white;
+  background:
+    linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.82)),
+    linear-gradient(90deg,rgba(0,0,0,.58),rgba(0,0,0,.06)),
+    url("Uni-Haus_Schauinsland");
+  background-size:cover;
+  background-position:center;
+}
+
+.hero-content{
+  width:100%;
+}
+
+.hero.small{
+  min-height:56vh;
+  align-items:flex-end;
+  padding:150px 7vw 6vw;
+}
+
+.booking-head{
+  padding:180px 7vw 8px;   /* Platz für Header + Stepper */
+  color:#111;
+}
+
+.booking-head .tag{
+  display:inline-block;
+  padding:9px 15px;
+  border-radius:999px;
+  border:1px solid rgba(0,0,0,.14);
+  background:white;
+  color:#12382a;
+  margin-bottom:16px;
+  font-size:13px;
+}
+
+.booking-head h1{
+  font-size:clamp(28px,3.6vw,48px);
+  line-height:1.05;
+  letter-spacing:-.03em;
+  max-width:800px;
+  color:#111;
+}
+
+.booking-head p{
+  margin-top:12px;
+  color:#6f6a60;
+  font-size:17px;
+  max-width:620px;
+  letter-spacing:normal;
+  opacity:1;
+}
+
+.tag{
+  display:inline-block;
+  padding:10px 16px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.35);
+  background:rgba(255,255,255,.12);
+  backdrop-filter:blur(14px);
+  margin-bottom:28px;
+  font-size:14px;
+}
+
+h1{
+  margin:0;
+  max-width:1250px;
+  font-size:clamp(60px,9.5vw,150px);
+  line-height:1.02;
+  letter-spacing:-.055em;
+  font-weight:300;
+}
+
+.hero.small h1{
+  font-size:clamp(42px,6vw,84px);
+  line-height:1.04;
+}
+
+.hero p{
+  max-width:690px;
+  margin-top:34px;
+  font-size:clamp(20px,2.2vw,30px);
+  line-height:1.3;
+  letter-spacing:-.03em;
+  opacity:.86;
+}
+
+.hero-actions{
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+  margin-top:36px;
+}
+
+.btn{
+  display:inline-block;
+  padding:17px 28px;
+  border-radius:999px;
+  font-size:15px;
+  border:0;
+  font-family:inherit;
+  font-weight:300;
+  cursor:pointer;
+}
+
+.btn.primary{
+  background:#d8f05f;
+  color:#111;
+}
+
+.btn.secondary{
+  background:rgba(255,255,255,.18);
+  color:white;
+  border:1px solid rgba(255,255,255,.3);
+  backdrop-filter:blur(12px);
+}
+
+.btn.ghost-dark{
+  background:transparent;
+  color:#12382a;
+  border:1px solid rgba(18,56,42,.3);
+}
+
+.btn.waitlist{background:#e8b84b;color:#3d2c05}
+
+.btn.block{width:100%;text-align:center}
+.btn[disabled]{opacity:.35;cursor:not-allowed}
+
+.stats{
+  width:100%;
+  padding:36px 7vw 130px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+  background:#f4f1ea;
+}
+
+.stat{
+  background:white;
+  border-radius:36px;
+  padding:42px;
+  min-height:220px;
+  box-shadow:0 20px 70px rgba(0,0,0,.08);
+}
+
+.stat strong{
+  display:block;
+  font-size:64px;
+  font-weight:300;
+  letter-spacing:-.09em;
+  margin-bottom:28px;
+}
+
+.stat span{
+  color:#6f6a60;
+  font-size:18px;
+  line-height:1.25;
+}
+
+section{
+  width:100%;
+  padding:140px 7vw;
+}
+
+section.tight{padding-top:70px}
+
+.section-head{
+  display:grid;
+  grid-template-columns:.55fr 1.45fr;
+  gap:80px;
+  margin-bottom:70px;
+}
+
+.label{
+  text-transform:uppercase;
+  letter-spacing:.14em;
+  font-size:12px;
+  color:#285b43;
+  padding-top:14px;
+}
+
+h2{
+  margin:0;
+  max-width:1100px;
+  font-size:clamp(40px,6vw,96px);
+  line-height:1.03;
+  letter-spacing:-.05em;
+  font-weight:300;
+}
+
+.lead{
+  max-width:850px;
+  margin-top:32px;
+  color:#6f6a60;
+  font-size:clamp(20px,2.2vw,30px);
+  line-height:1.3;
+  letter-spacing:-.03em;
+}
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:24px;
+}
+
+.card{
+  background:white;
+  border-radius:42px;
+  padding:42px;
+  min-height:360px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  border:1px solid rgba(0,0,0,.08);
+  transition:transform .35s ease, box-shadow .35s ease;
+}
+
+.card:hover{
+  transform:translateY(-9px);
+  box-shadow:0 34px 90px rgba(0,0,0,.13);
+}
+
+.number{
+  width:52px;
+  height:52px;
+  border-radius:50%;
+  background:#e8dfcf;
+  color:#12382a;
+  display:grid;
+  place-items:center;
+  font-size:14px;
+}
+
+.card h3{
+  margin:0 0 16px;
+  font-size:clamp(28px,3vw,42px);
+  line-height:1.02;
+  letter-spacing:-.04em;
+  font-weight:300;
+}
+
+.card p{
+  margin:0;
+  color:#6f6a60;
+  font-size:18px;
+  line-height:1.38;
+}
+
+.card .card-list{
+  list-style:none;
+  padding:0;
+  margin:14px 0 0;
+  display:grid;
+  gap:8px;
+  color:#6f6a60;
+  font-size:15px;
+}
+
+.card .card-list li:before{content:"— "}
+
+.card-link{
+  margin-top:22px;
+  font-size:14px;
+  color:#12382a;
+  border-bottom:1px solid rgba(18,56,42,.3);
+  padding-bottom:2px;
+  display:inline-block;
+  cursor:pointer;
+  align-self:flex-start;
+}
+
+.transition-image{
+  width:100%;
+  height:80vh;
+  background:
+    linear-gradient(180deg,rgba(0,0,0,.1),rgba(0,0,0,.5)),
+    url("Uni-Haus_Schauinsland");
+  background-size:cover;
+  background-position:center;
+  background-attachment:fixed;
+  display:flex;
+  align-items:center;
+  padding:7vw;
+  color:white;
+}
+
+.transition-image h2{
+  max-width:1000px;
+  color:white;
+}
+
+.dark{
+  background:#12382a;
+  color:white;
+}
+
+.dark .label{
+  color:#d8f05f;
+}
+
+.dark .lead{
+  color:rgba(255,255,255,.72);
+}
+
+.process{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:1px;
+  border-radius:44px;
+  overflow:hidden;
+  background:rgba(255,255,255,.18);
+}
+
+.step{
+  min-height:280px;
+  padding:38px;
+  background:rgba(255,255,255,.08);
+}
+
+.step span{
+  display:block;
+  color:#d8f05f;
+  margin-bottom:60px;
+  font-size:14px;
+}
+
+.step h3{
+  margin:0 0 14px;
+  font-size:30px;
+  line-height:1.02;
+  font-weight:300;
+  letter-spacing:-.03em;
+}
+
+.step p{
+  margin:0;
+  color:rgba(255,255,255,.68);
+  line-height:1.35;
+  font-size:17px;
+}
+
+.split{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:28px;
+  align-items:start;
+}
+
+.image-box{
+  min-height:780px;
+  border-radius:48px;
+  background:
+    linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.25)),
+    url("Uni-Haus_Schauinsland");
+  background-size:cover;
+  background-position:center;
+  position:sticky;
+  top:120px;
+}
+
+.info-box{
+  background:white;
+  border-radius:48px;
+  padding:56px;
+}
+
+.room-list{
+  display:grid;
+  gap:16px;
+  margin-top:44px;
+}
+
+.room{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:20px;
+  align-items:center;
+  background:#f4f1ea;
+  border-radius:28px;
+  padding:24px;
+}
+
+.room strong{
+  font-weight:400;
+  font-size:19px;
+}
+
+.room small{
+  color:#6f6a60;
+  font-size:15px;
+}
+
+.pill{
+  background:white;
+  color:#12382a;
+  border-radius:999px;
+  padding:10px 14px;
+  font-size:13px;
+  white-space:nowrap;
+}
+
+.pill.on-dark{background:rgba(255,255,255,.14);color:#fff}
+.pill.accent{background:#d8f05f;color:#12382a}
+
+/* ---------- booking wizard ---------- */
+.booking{
+  display:grid;
+  grid-template-columns:.9fr 1.1fr;
+  gap:40px;
+  align-items:start;
+}
+
+.booking-panel{
+  background:white;
+  border-radius:48px;
+  padding:48px;
+  box-shadow:0 28px 90px rgba(0,0,0,.09);
+}
+
+form{
+  display:grid;
+  gap:18px;
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+}
+
+label{
+  display:grid;
+  gap:9px;
+  color:#6f6a60;
+  font-size:14px;
+}
+
+input,select{
+  width:100%;
+  padding:18px;
+  border-radius:20px;
+  border:1px solid rgba(0,0,0,.14);
+  font:inherit;
+  font-weight:300;
+  font-size:16px;
+}
+
+button{
+  border:0;
+  border-radius:999px;
+  padding:19px 24px;
+  background:#12382a;
+  color:white;
+  font:inherit;
+  cursor:pointer;
+  margin-top:10px;
+}
+
+.result{
+  margin-top:22px;
+  padding:22px;
+  border-radius:28px;
+  background:#f4f1ea;
+  color:#6f6a60;
+  line-height:1.45;
+}
+
+.group-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:24px;
+}
+
+.group-card{
+  background:white;
+  border-radius:42px;
+  padding:44px;
+  border:2px solid rgba(0,0,0,.06);
+  cursor:pointer;
+  transition:border-color .25s ease, transform .25s ease;
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+
+.group-card:hover{transform:translateY(-6px)}
+.group-card.selected{border-color:#12382a;background:#eef5ee}
+
+.group-card .icon{
+  width:52px;height:52px;border-radius:50%;
+  background:#e8dfcf;color:#12382a;
+  display:grid;place-items:center;font-size:20px;
+}
+
+.group-card h3{margin:0;font-size:30px;font-weight:300;letter-spacing:-.03em}
+.group-card p{margin:0;color:#6f6a60;font-size:16px;line-height:1.4}
+.group-card .tarif{font-size:13px;color:#12382a;background:#d8f05f;display:inline-block;padding:8px 14px;border-radius:999px;align-self:flex-start}
+
+.wizard-panel{
+  background:white;
+  border-radius:48px;
+  padding:48px;
+  box-shadow:0 28px 90px rgba(0,0,0,.09);
+}
+
+.info-note{
+  background:#eef5ee;
+  border-radius:28px;
+  padding:24px 26px;
+  color:#12382a;
+  font-size:15px;
+  line-height:1.5;
+}
+
+.warn-note{
+  background:#fdf3e0;
+  border:1px solid #e6c98a;
+  border-radius:28px;
+  padding:22px 26px;
+  color:#7a5a17;
+  font-size:15px;
+  line-height:1.5;
+  margin-top:18px;
+}
+.warn-note[hidden]{display:none}
+.warn-note strong{font-weight:400;color:#5c430f}
+
+/* ---------- calendar ---------- */
+.cal-widget{
+  background:#f4f1ea;
+  border-radius:32px;
+  padding:26px 26px 20px;
+}
+
+.cal-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:14px;
+  font-size:16px;
+}
+
+.cal-nav{
+  background:white;
+  border:0;
+  width:36px;height:36px;
+  border-radius:50%;
+  display:grid;place-items:center;
+  cursor:pointer;
+  padding:0;
+  margin:0;
+  color:#111;
+}
+.cal-nav[disabled]{opacity:.3;cursor:not-allowed}
+
+.cal-weekdays{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  text-align:center;
+  color:#6f6a60;
+  font-size:12px;
+  margin-bottom:6px;
+}
+
+.cal-grid{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:4px;
+}
+
+.cal-cell{
+  aspect-ratio:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:12px;
+  font-size:13px;
+  color:#111;
+  background:white;
+}
+
+.cal-cell.pad{background:transparent}
+.cal-cell.past{background:transparent;color:#c9c5ba}
+.cal-cell.free{cursor:pointer;transition:background .15s ease}
+.cal-cell.free:hover{background:#e8dfcf}
+
+/* Studi-Vorrang: für Studierende normal buchbar (hell markiert),
+   für andere Gruppen nur über die Warteliste (gelb markiert) */
+.cal-cell.priority{background:#eaf6ea;color:#12382a}
+.cal-cell.priority:hover{background:#d5eed5}
+.cal-cell.waitlist{background:#f7e6c4;color:#7a5a17;cursor:pointer;transition:background .15s ease}
+.cal-cell.waitlist:hover{background:#f0d79c}
+
+.cal-cell.in-range{background:#cfe8cf;color:#12382a}
+.cal-cell.waitlist.in-range{background:#e9dfa8;color:#5c430f}
+.cal-cell.endpoint{background:#12382a;color:white;font-weight:400}
+.cal-cell.waitlist.endpoint{background:#8a6a14;color:white}
+
+.cal-legend{
+  display:flex;
+  gap:18px;
+  flex-wrap:wrap;
+  margin-top:14px;
+  font-size:12px;
+  color:#6f6a60;
+}
+.cal-legend .dot{
+  display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:-1px;
+}
+.dot.free{background:white;border:1px solid rgba(0,0,0,.15)}
+.dot.range{background:#cfe8cf}
+.dot.priority{background:#eaf6ea;border:1px solid #b9dcb9}
+.dot.waitlist{background:#f7e6c4;border:1px solid #e6c98a}
+
+.cal-hint{
+  margin-top:12px;
+  min-height:36px;
+  display:flex;
+  align-items:center;
+  font-size:13px;
+  line-height:1.4;
+  color:#6f6a60;
+  background:white;
+  border-radius:16px;
+  padding:9px 14px;
+  transition:background .15s ease;
+}
+.cal-hint.warn{background:#fdf3e0;color:#7a5a17}
+
+.addon-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+  margin-top:6px;
+}
+
+.addon{
+  display:flex;
+  align-items:flex-start;
+  gap:14px;
+  background:#f4f1ea;
+  border-radius:28px;
+  padding:22px;
+  cursor:pointer;
+  border:2px solid transparent;
+}
+
+.addon.wide{grid-column:1 / -1}
+.addon.checked{border-color:#12382a;background:#eef5ee}
+.addon input{width:auto;padding:0;margin-top:4px}
+.addon div strong{display:block;font-size:17px;font-weight:400;margin-bottom:4px}
+.addon div span{color:#6f6a60;font-size:14px;line-height:1.4}
+
+.addon-link{
+  color:#12382a;
+  border-bottom:1px solid rgba(18,56,42,.4);
+  cursor:pointer;
+}
+.addon-link:hover{border-bottom-color:#12382a}
+
+/* ---------- shuttle ---------- */
+.shuttle-box{
+  margin-top:18px;
+  border:2px solid #12382a;
+  border-radius:32px;
+  padding:26px;
+  background:white;
+}
+.shuttle-box[hidden]{display:none}
+.shuttle-box > strong{display:block;font-size:18px;font-weight:400;margin-bottom:6px}
+.shuttle-box > p{margin:0 0 16px;color:#6f6a60;font-size:14px;line-height:1.45}
+.shuttle-box .addon{background:#f4f1ea}
+.shuttle-total{
+  margin-top:16px;
+  padding:16px 20px;
+  border-radius:22px;
+  background:#eef5ee;
+  color:#12382a;
+  font-size:15px;
+}
+
+.summary-list{display:grid;gap:14px;margin:24px 0}
+.summary-row{
+  display:flex;
+  justify-content:space-between;
+  gap:16px;
+  padding:16px 20px;
+  background:#f4f1ea;
+  border-radius:22px;
+  font-size:15px;
+}
+.summary-row.warn{background:#fdf3e0;color:#7a5a17}
+.summary-row.warn strong{color:#5c430f}
+.summary-row .edit{color:#12382a;text-decoration:underline;cursor:pointer;font-size:13px;white-space:nowrap}
+.summary-total{
+  display:flex;justify-content:space-between;align-items:baseline;
+  padding:22px 0 6px;border-top:1px solid rgba(0,0,0,.12);margin-top:6px;
+}
+.summary-total strong{font-size:36px;font-weight:300;letter-spacing:-.04em}
+
+.wizard-actions{display:flex;justify-content:space-between;gap:14px;margin-top:30px}
+
+.confirm-box{
+  max-width:760px;
+  background:white;
+  border-radius:48px;
+  padding:56px;
+  box-shadow:0 28px 90px rgba(0,0,0,.09);
+  color:#111;                     /* Fix: erbte vorher Weiß aus .dark */
+}
+
+/* Textfarben innerhalb der weißen Box explizit setzen */
+.confirm-box h2,
+.confirm-box strong{color:#111}
+.confirm-box .label{color:#285b43}
+.confirm-box .lead{color:#6f6a60}
+.confirm-box .checklist .item strong{color:#111}
+.confirm-box .checklist .item span{color:#6f6a60}
+.confirm-box .confirm-ok{color:#12382a}
+
+.confirm-ok{
+  width:64px;height:64px;border-radius:50%;
+  background:#d8f05f;color:#12382a;
+  display:grid;place-items:center;font-size:26px;margin-bottom:24px;
+}
+.confirm-ok.waitlist{background:#e8b84b;color:#3d2c05}
+
+.checklist{display:grid;gap:14px;margin:28px 0}
+.checklist .item{display:flex;gap:14px;align-items:flex-start;background:#f4f1ea;border-radius:22px;padding:18px 20px}
+.checklist .item.warn{background:#fdf3e0}
+.checklist .item .dot{width:8px;height:8px;border-radius:50%;background:#12382a;margin-top:8px;flex:none}
+.checklist .item.warn .dot{background:#b98a17}
+.checklist .item div strong{display:block;font-weight:400;margin-bottom:3px;color:#111}
+.checklist .item div span{color:#6f6a60;font-size:14px;line-height:1.45}
+.checklist .item div span a{color:#12382a;border-bottom:1px solid rgba(18,56,42,.4)}
+
+.pricing{
+  display:grid;
+  grid-template-columns:1.2fr .8fr;
+  gap:24px;
+}
+
+.price-card{
+  background:white;
+  border-radius:42px;
+  padding:46px;
+}
+
+.price-card.black{
+  background:#111;
+  color:white;
+}
+
+.price-card h3{
+  margin:0 0 28px;
+  font-size:40px;
+  font-weight:300;
+  letter-spacing:-.045em;
+}
+
+.price-card ul{
+  list-style:none;
+  padding:0;
+  margin:0;
+  display:grid;
+  gap:18px;
+  color:#6f6a60;
+  font-size:18px;
+}
+
+.price-card.black ul{
+  color:rgba(255,255,255,.7);
+}
+
+.rate-table{width:100%;border-collapse:collapse;margin-top:20px}
+.rate-table th,.rate-table td{text-align:left;padding:16px 14px;font-size:15px;border-bottom:1px solid rgba(0,0,0,.1)}
+.rate-table th{color:#6f6a60;font-weight:400;text-transform:uppercase;letter-spacing:.08em;font-size:12px}
+
+.faq-grid{
+  display:grid;
+  grid-template-columns:.7fr 1.3fr;
+  gap:80px;
+}
+
+details{
+  border-top:1px solid rgba(0,0,0,.14);
+  padding:32px 0;
+}
+
+details:last-child{
+  border-bottom:1px solid rgba(0,0,0,.14);
+}
+
+summary{
+  cursor:pointer;
+  list-style:none;
+  font-size:28px;
+  letter-spacing:-.03em;
+}
+
+summary::-webkit-details-marker{display:none}
+
+details p{
+  color:#6f6a60;
+  line-height:1.45;
+  max-width:800px;
+  font-size:18px;
+}
+
+footer{
+  width:100%;
+  padding:70px 7vw 90px;
+  display:flex;
+  justify-content:space-between;
+  gap:30px;
+  border-top:1px solid rgba(0,0,0,.14);
+  color:#6f6a60;
+}
+
+footer strong{
+  color:#111;
+  font-weight:400;
+}
+
+footer nav{gap:20px}
+
+@media(max-width:900px){
+  header{
+    width:calc(100% - 28px);
+    top:14px;
+  }
+
+  nav{
+    display:none;
+  }
+
+  .stepper-wrap{top:92px;width:calc(100% - 28px)}
+  .stepper{font-size:11px;padding:10px 14px;gap:6px}
+  .stepper .crumb{padding:3px 8px}
+
+  .hero{
+    padding:120px 24px 60px;
+  }
+
+  .booking-head{
+    padding:172px 24px 4px;
+  }
+
+  h1{
+    font-size:52px;
+  }
+
+  .stats,
+  .cards,
+  .process,
+  .split,
+  .booking,
+  .pricing,
+  .section-head,
+  .faq-grid,
+  .group-grid,
+  .addon-grid,
+  .form-grid{
+    grid-template-columns:1fr;
+  }
+
+  section{
+    padding:90px 24px;
+  }
+
+  .stats{
+    padding:24px 24px 90px;
+  }
+
+  .transition-image{
+    height:65vh;
+    background-attachment:scroll;
+    padding:24px;
+  }
+
+  .image-box{
+    min-height:420px;
+    position:relative;
+    top:auto;
+  }
+
+  footer{
+    flex-direction:column;
+    padding:55px 24px 70px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <a class="logo" data-route="home">Uni-Haus Schauinsland</a>
+
+  <nav>
+    <a data-route="ueber">Über das Haus</a>
+    <a data-route="zielgruppen">Zielgruppen</a>
+    <a data-route="preise">Preise</a>
+    <a data-route="faq">FAQ</a>
+  </nav>
+
+  <button class="nav-button" id="headerBookBtn">Buchen</button>
+</header>
+
+<div class="stepper-wrap" id="stepperWrap">
+  <div class="stepper" id="stepper"></div>
+</div>
+
+<main>
+
+<!-- ============ HOME ============ -->
+<div class="page" id="page-home">
+
+  <section class="hero">
+    <div class="hero-content">
+      <div class="tag">Retreats · Seminare · Teambuilding</div>
+      <h1>Raus aus dem Campus.<br>Rein in den Schwarzwald.</h1>
+      <p>Das Uni-Haus Schauinsland als moderner Ort für Gruppenfahrten, Seminare, Fachschaften und konzentrierte Arbeitsphasen.</p>
+
+      <div class="hero-actions">
+        <button class="btn primary" data-route="buchung-gruppe">Verfügbarkeit prüfen</button>
+        <button class="btn secondary" data-route="ueber">Haus ansehen</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="stats">
+    <div class="stat">
+      <strong>365</strong>
+      <span>Tage im Jahr für alle drei Gruppen buchbar</span>
+    </div>
+    <div class="stat">
+      <strong>5</strong>
+      <span>Wochen zu Semesterbeginn mit Vorrang für Studierende</span>
+    </div>
+    <div class="stat">
+      <strong>24/7</strong>
+      <span>Digitale Anfrage, Kalender und Check-in-Informationen</span>
+    </div>
+  </div>
+
+  <section class="tight">
+    <div class="section-head">
+      <div class="label">Für wen?</div>
+      <div>
+        <h2>Gebaut für Gruppen, nicht für Einzelbett-Chaos.</h2>
+        <p class="lead">Drei Nutzergruppen, drei unterschiedliche Anforderungen an Anfahrt, Tarif und Ablauf — die Website führt jede Gruppe direkt zum passenden Weg.</p>
+      </div>
+    </div>
+
+    <div class="cards">
+      <article class="card">
+        <span class="number">01</span>
+        <div>
+          <h3>Studierende & Fachschaften</h3>
+          <p>Wochenenden, Projektphasen, Gruppenfahrten und selbstorganisierte Aufenthalte. Vorrang in den ersten fünf Semesterwochen.</p>
+        </div>
+        <span class="card-link" data-route="zielgruppen">Mehr erfahren →</span>
+      </article>
+
+      <article class="card">
+        <span class="number">02</span>
+        <div>
+          <h3>Forschungsgruppen</h3>
+          <p>Blockseminare, Workshops und konzentrierte Arbeitsphasen außerhalb des Campus.</p>
+        </div>
+        <span class="card-link" data-route="zielgruppen">Mehr erfahren →</span>
+      </article>
+
+      <article class="card">
+        <span class="number">03</span>
+        <div>
+          <h3>Unternehmen & Externe</h3>
+          <p>Teambuilding, Bildungsarbeit und Retreats mit transparenter Buchungslogik.</p>
+        </div>
+        <span class="card-link" data-route="zielgruppen">Mehr erfahren →</span>
+      </article>
+    </div>
+  </section>
+
+  <div class="transition-image">
+    <h2>Ein Ort zwischen Arbeit, Austausch und Abstand.</h2>
+  </div>
+
+  <section class="dark tight">
+    <div class="section-head">
+      <div class="label">Buchungslogik</div>
+      <div>
+        <h2>Ganzjährig offen — mit einem Vorrecht.</h2>
+        <p class="lead">Alle drei Gruppen buchen das ganze Jahr über nach denselben Regeln. Nur die ersten fünf Wochen jedes Semesters gehören zuerst den Studierenden; Forschungsgruppen und Externe kommen dort auf die Warteliste.</p>
+      </div>
+    </div>
+
+    <div class="process">
+      <article class="step">
+        <span>01</span>
+        <h3>Zielgruppe wählen</h3>
+        <p>Studierende, Forschungsgruppe oder Unternehmen/Extern.</p>
+      </article>
+
+      <article class="step">
+        <span>02</span>
+        <h3>Termin & Anfahrt</h3>
+        <p>Zeitraum, Gruppengröße und passende Mobilitätsoption.</p>
+      </article>
+
+      <article class="step">
+        <span>03</span>
+        <h3>Zusatzleistungen</h3>
+        <p>Sauna, Verpflegung, Technik und Reinigung frei kombinieren.</p>
+      </article>
+
+      <article class="step">
+        <span>04</span>
+        <h3>Bestätigung</h3>
+        <p>Direkte Buchung oder Wartelistenplatz — transparent ausgewiesen.</p>
+      </article>
+    </div>
+
+    <div style="margin-top:56px">
+      <button class="btn primary" data-route="buchung-gruppe">Jetzt Aufenthalt planen</button>
+    </div>
+  </section>
+
+</div>
+
+<!-- ============ ÜBER DAS HAUS ============ -->
+<div class="page" id="page-ueber">
+
+  <section class="hero small">
+    <div class="hero-content">
+      <div class="tag">Über das Haus</div>
+      <h1>Alles sichtbar,<br>was buchbar ist.</h1>
+      <p>Zimmer, Seminarräume, Gemeinschaftsbereiche und Anreise — ein digitales Hausprofil ohne Rückfragen.</p>
+    </div>
+  </section>
+
+  <section class="split tight">
+    <div class="image-box"></div>
+
+    <div class="info-box">
+      <div class="label">Haus & Räume</div>
+      <h2>Zimmer nicht als Betten verkaufen.</h2>
+      <p class="lead">Seminarräume klar von Übernachtungen trennen und Ausstattung ohne Nachfragen erklären.</p>
+
+      <div class="room-list">
+        <div class="room">
+          <div>
+            <strong>Mehrbettzimmer</strong><br>
+            <small>Buchung ganzer Zimmer, keine Einzelbetten</small>
+          </div>
+          <span class="pill">Übernachtung</span>
+        </div>
+
+        <div class="room">
+          <div>
+            <strong>Seminarraum</strong><br>
+            <small>Für Workshops, Lehre und Gruppenarbeit</small>
+          </div>
+          <span class="pill">separat buchbar</span>
+        </div>
+
+        <div class="room">
+          <div>
+            <strong>Sauna & Spa-Bereich</strong><br>
+            <small>Optionale Zusatzleistung, in der Buchung wählbar</small>
+          </div>
+          <span class="pill">Zusatzleistung</span>
+        </div>
+
+        <div class="room">
+          <div>
+            <strong>Gemeinschaftsbereiche</strong><br>
+            <small>Küche, Aufenthaltsraum und Außenbereich</small>
+          </div>
+          <span class="pill">inklusive</span>
+        </div>
+      </div>
+
+      <div style="margin-top:32px">
+        <button class="btn primary" data-route="buchung-gruppe">Verfügbarkeit prüfen</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="transition-image">
+    <h2>Mobilität wird mitgedacht – von ÖPNV bis Shuttle.</h2>
+  </div>
+
+  <section class="tight">
+    <div class="section-head">
+      <div class="label">Mobilität</div>
+      <div>
+        <h2>Anreise als Teil des Konzepts.</h2>
+        <p class="lead">ÖPNV, Fahrrad, E-Bike, Shuttle, Charterbus und Fahrgemeinschaften werden direkt mitgedacht — die passende Option hängt von der Zielgruppe ab und wird im Buchungsprozess angezeigt.</p>
+      </div>
+    </div>
+
+    <div class="cards">
+      <article class="card">
+        <span class="number">ÖPNV</span>
+        <div>
+          <h3>Bus & Bahn</h3>
+          <p>Für Studierende im Preis inklusive. Klare Route, letzte Verbindung, Haltestelleninfo.</p>
+        </div>
+      </article>
+
+      <article class="card">
+        <span class="number">Bike</span>
+        <div>
+          <h3>E-Bike & Fahrrad</h3>
+          <p>Für sportliche Gruppen mit Höhenmeter-Hinweis und Abstellmöglichkeiten.</p>
+        </div>
+      </article>
+
+      <article class="card">
+        <span class="number">Bus</span>
+        <div>
+          <h3>Shuttle & Charterbus</h3>
+          <p>Shuttle ab Bahnhof Freiburg direkt buchbar (300 € pro Fahrt). Charterbusse werden über unseren Partnerbetrieb selbst organisiert.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+</div>
+
+<!-- ============ ZIELGRUPPEN ============ -->
+<div class="page" id="page-zielgruppen">
+
+  <section class="hero small">
+    <div class="hero-content">
+      <div class="tag">Zielgruppen</div>
+      <h1>Drei Wege,<br>ein Haus.</h1>
+      <p>Jede Gruppe hat andere Bedürfnisse — bei Tarif, Anfahrt und Zusatzleistungen. Wähle direkt deine Gruppe.</p>
+    </div>
+  </section>
+
+  <section class="tight">
+    <div class="group-grid">
+      <article class="group-card" data-select-group="student">
+        <span class="icon">🎓</span>
+        <h3>Studierende</h3>
+        <p>Wochenenden, Projektphasen, Fachschaftsfahrten. Niedrigschwelliger Zugang, begrenztes Budget.</p>
+        <ul class="card-list">
+          <li>Vorrang in den ersten 5 Semesterwochen</li>
+          <li>Anfahrt: ÖPNV-Ticket inklusive</li>
+          <li>Reduzierter Tarif über Uni-Login, keine Kaution</li>
+        </ul>
+        <span class="tarif">ab 18 €/Person/Nacht</span>
+        <span class="card-link" data-select-group="student">Diese Gruppe buchen →</span>
+      </article>
+
+      <article class="group-card" data-select-group="research">
+        <span class="icon">🔬</span>
+        <h3>Forschungsgruppen</h3>
+        <p>Blockseminare, Tagungen, Workshops. Verlässliche Planung, technische Ausstattung im Fokus.</p>
+        <ul class="card-list">
+          <li>Ganzjährig buchbar, Warteliste in den ersten 5 Semesterwochen</li>
+          <li>Anfahrt: ÖPNV empfohlen, Parkplatz für Technik auf Anfrage</li>
+          <li>Beamer, Flipchart, Seminarraum wählbar</li>
+        </ul>
+        <span class="tarif">ab 28 €/Person/Nacht</span>
+        <span class="card-link" data-select-group="research">Diese Gruppe buchen →</span>
+      </article>
+
+      <article class="group-card" data-select-group="external">
+        <span class="icon">🏢</span>
+        <h3>Unternehmen & Externe</h3>
+        <p>Teambuilding, Retreats, Bildungsarbeit. Professioneller Auftritt, verbindliche Konditionen.</p>
+        <ul class="card-list">
+          <li>Ganzjährig buchbar, Warteliste in den ersten 5 Semesterwochen</li>
+          <li>Anfahrt: Parkplatz, Shuttle & Charterbus buchbar</li>
+          <li>Voller Tarif, Kaution bei Buchung</li>
+        </ul>
+        <span class="tarif">ab 44 €/Person/Nacht</span>
+        <span class="card-link" data-select-group="external">Diese Gruppe buchen →</span>
+      </article>
+    </div>
+  </section>
+
+</div>
+
+<!-- ============ PREISE ============ -->
+<div class="page" id="page-preise">
+
+  <section class="hero small">
+    <div class="hero-content">
+      <div class="tag">Preislogik</div>
+      <h1>Transparent,<br>fair, automatisierbar.</h1>
+      <p>Der Preis ergibt sich aus Zeitraum, Gruppe, Nutzung und Zusatzleistungen — nachvollziehbar für alle drei Zielgruppen.</p>
+    </div>
+  </section>
+
+  <section class="tight">
+    <div class="pricing">
+      <article class="price-card black">
+        <h3>Variablen</h3>
+        <ul>
+          <li>Haupt- und Nebensaison</li>
+          <li>Wochenende, Wochentage und Feiertage</li>
+          <li>Studierende, Forschungsgruppen und Externe</li>
+          <li>Zimmer, Seminarraum oder Kombination</li>
+          <li>Zusatzleistungen: Sauna, Vollpension, Technik, Reinigung</li>
+          <li>Mobilität: Shuttle 300 € pro Fahrt</li>
+        </ul>
+      </article>
+
+      <article class="price-card">
+        <h3>Zahlung</h3>
+        <ul>
+          <li>Kreditkarte oder Sofortzahlung</li>
+          <li>Rechnung mit Anzahlung (Unternehmen)</li>
+          <li>PayPal optional</li>
+          <li>DSGVO-konforme Speicherung</li>
+          <li>Warteliste: keine Zahlung vor Zusage</li>
+        </ul>
+      </article>
+    </div>
+
+    <table class="rate-table">
+      <thead>
+        <tr><th>Zielgruppe</th><th>Preis pro Person/Nacht</th><th>Kaution</th><th>Erste 5 Semesterwochen</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Studierende</td><td>18 €</td><td>keine</td><td>Vorrang, direkt buchbar</td></tr>
+        <tr><td>Forschungsgruppen</td><td>28 €</td><td>je nach Fakultät</td><td>nur Warteliste</td></tr>
+        <tr><td>Unternehmen & Externe</td><td>44 €</td><td>ja</td><td>nur Warteliste</td></tr>
+      </tbody>
+    </table>
+
+    <table class="rate-table">
+      <thead>
+        <tr><th>Mobilität</th><th>Preis</th><th>Buchung</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>ÖPNV</td><td>Studierende inklusive</td><td>im Buchungsprozess</td></tr>
+        <tr><td>Shuttle Bahnhof Freiburg ⇄ Haus</td><td>300 € pro Fahrt</td><td>direkt mitbuchbar</td></tr>
+        <tr><td>Gruppen-/Charterbus</td><td>nach Angebot des Partnerbetriebs</td><td>selbst organisiert</td></tr>
+      </tbody>
+    </table>
+
+    <div style="margin-top:44px">
+      <button class="btn primary" data-route="buchung-gruppe">Preis für meine Gruppe berechnen</button>
+    </div>
+  </section>
+
+</div>
+
+<!-- ============ FAQ ============ -->
+<div class="page" id="page-faq">
+
+  <section class="hero small">
+    <div class="hero-content">
+      <div class="tag">FAQ</div>
+      <h1>Weniger Rückfragen.<br>Mehr Klarheit.</h1>
+    </div>
+  </section>
+
+  <section class="faq-grid tight">
+    <div>
+      <div class="label">Häufige Fragen</div>
+      <h2>Kurz erklärt.</h2>
+    </div>
+
+    <div>
+      <details open>
+        <summary>Wer darf wann buchen?</summary>
+        <p>Grundsätzlich alle drei Gruppen an allen Tagen. Ausnahme: die ersten fünf Wochen jedes Semesters sind für Studierende reserviert. Forschungsgruppen und Externe können sich für diesen Zeitraum auf die Warteliste setzen lassen.</p>
+      </details>
+
+      <details>
+        <summary>Was bedeutet ein Wartelistenplatz konkret?</summary>
+        <p>Der Zeitraum wird unverbindlich vorgemerkt, es wird nichts abgebucht und es entstehen keine Stornokosten. Vier Wochen vor Anreise entscheidet das System: Zusage und normale Buchung, oder Absage mit Vorschlag für Alternativtermine.</p>
+      </details>
+
+      <details>
+        <summary>Kann man einzelne Betten buchen?</summary>
+        <p>Nein. Die Buchungslogik basiert auf ganzen Zimmern oder ganzen Nutzungseinheiten.</p>
+      </details>
+
+      <details>
+        <summary>Können Seminarräume einzeln gebucht werden?</summary>
+        <p>Ja. Seminarräume können unabhängig oder zusammen mit Übernachtungen angefragt werden.</p>
+      </details>
+
+      <details>
+        <summary>Wie kommt eine große Gruppe zum Haus?</summary>
+        <p>Der Shuttle ab Bahnhof Freiburg lässt sich im Buchungsprozess für Anreise und Abreise direkt anfragen (300 € pro Fahrt). Ein Gruppen- oder Charterbus wird selbst organisiert — dafür verlinken wir direkt auf unseren Partnerbetrieb.</p>
+      </details>
+
+      <details>
+        <summary>Wie unterscheidet sich der Buchungsprozess je Zielgruppe?</summary>
+        <p>Studierende erhalten reduzierten Tarif und ÖPNV inklusive, Forschungsgruppen können Technik hinzubuchen, Unternehmen/Externe zahlen den vollen Tarif inkl. Kaution und Parkplatz-/Shuttle-Optionen.</p>
+      </details>
+
+      <details>
+        <summary>Welche rechtlichen Seiten braucht die Website?</summary>
+        <p>Impressum, Datenschutz, AGB, Hausordnung, Stornobedingungen, Cookie-Consent und Hinweise zur Zahlungsabwicklung.</p>
+      </details>
+
+      <details>
+        <summary>Was muss im Admin-Bereich möglich sein?</summary>
+        <p>Kalender bearbeiten, Vorrangzeiträume pflegen, Wartelisten auflösen, Preise anpassen, Rechnungen exportieren und E-Mails automatisieren.</p>
+      </details>
+    </div>
+  </section>
+
+</div>
+
+<!-- ============ BUCHUNG: SCHRITT 1 – GRUPPE ============ -->
+<div class="page" id="page-buchung-gruppe">
+  <section class="booking-head">
+    <div class="tag">Buchung · Schritt 1 von 4</div>
+    <h1>Wer bucht das Uni-Haus?</h1>
+    <p>Die Auswahl bestimmt Tarif, Kaution, Anfahrtsempfehlung — und ob in den ersten fünf Semesterwochen direkt gebucht oder nur vorgemerkt werden kann.</p>
+  </section>
+
+  <section class="tight" style="padding-top:20px">
+    <div class="group-grid">
+      <article class="group-card" data-select-group="student" data-next="buchung-termin">
+        <span class="icon">🎓</span>
+        <h3>Studierende</h3>
+        <p>Wochenenden, Projektphasen, Fachschaftsfahrten.</p>
+      </article>
+
+      <article class="group-card" data-select-group="research" data-next="buchung-termin">
+        <span class="icon">🔬</span>
+        <h3>Forschungsgruppen</h3>
+        <p>Blockseminare, Tagungen, Workshops.</p>
+      </article>
+
+      <article class="group-card" data-select-group="external" data-next="buchung-termin">
+        <span class="icon">🏢</span>
+        <h3>Unternehmen & Externe</h3>
+        <p>Teambuilding, Retreats, Bildungsarbeit.</p>
+      </article>
+    </div>
+    <p style="margin-top:28px;color:#6f6a60;font-size:15px">Unsicher, welche Gruppe passt? <span class="card-link" data-route="zielgruppen" style="margin-top:0">Zielgruppen vergleichen →</span></p>
+  </section>
+</div>
+
+<!-- ============ BUCHUNG: SCHRITT 2 – TERMIN & ANFAHRT ============ -->
+<div class="page" id="page-buchung-termin">
+  <section class="booking-head">
+    <div class="tag">Buchung · Schritt 2 von 4</div>
+    <h1>Termin & Anfahrt</h1>
+    <p id="termin-sub">Zeitraum, Gruppengröße, Zweck und Anreiseart.</p>
+  </section>
+
+  <section class="booking tight" style="padding-top:20px">
+    <div>
+      <div class="label" style="padding-top:0">Hinweis</div>
+      <h2 style="font-size:clamp(28px,3.4vw,44px)" id="verfuegbarkeitTitle">Verfügbarkeit</h2>
+      <p class="lead" style="font-size:17px" id="verfuegbarkeitText"></p>
+      <div class="info-note" id="anfahrtNote" style="margin-top:24px"></div>
+      <div class="warn-note" id="wartelisteNote" hidden></div>
+      <p class="lead" style="font-size:17px;margin-top:20px">Mehr zu Preisen und Konditionen? <span class="card-link" data-route="preise" style="margin-top:0">Preisübersicht ansehen →</span></p>
+    </div>
+
+
+    <div class="wizard-panel">
+
+      <div class="label" style="padding-top:0">Zeitraum wählen</div>
+      <div class="cal-widget">
+        <div class="cal-header">
+          <button type="button" class="cal-nav" id="calPrev" aria-label="Vorheriger Monat">←</button>
+          <span id="calTitle"></span>
+          <button type="button" class="cal-nav" id="calNext" aria-label="Nächster Monat">→</button>
+        </div>
+        <div class="cal-weekdays">
+          <span>Mo</span><span>Di</span><span>Mi</span><span>Do</span><span>Fr</span><span>Sa</span><span>So</span>
+        </div>
+        <div class="cal-grid" id="calGrid"></div>
+        <div class="cal-legend" id="calLegend"></div>
+        <div class="cal-hint" id="calHint">Fahr über einen Tag, um Details zu sehen.</div>
+      </div>
+      <div class="result" id="calResult" style="margin-top:18px">Wähle Anreise- und Abreisetag im Kalender.</div>
+
+      <form id="terminForm" style="margin-top:30px">
+        <div class="form-grid">
+          <label>Personen
+            <input type="number" id="people" min="1" max="80" value="14">
+          </label>
+          <label>Zweck
+            <select id="purpose">
+              <option value="seminar">Seminar / Lehrveranstaltung</option>
+              <option value="retreat">Retreat / Gruppenfahrt</option>
+              <option value="tagung">Tagung / Workshop</option>
+              <option value="event">Event / Teambuilding</option>
+            </select>
+          </label>
+        </div>
+
+        <label>Nutzung
+          <select id="usageType">
+            <option value="overnight">Übernachtung</option>
+            <option value="seminar">Seminarraum</option>
+            <option value="both">Übernachtung + Seminarraum</option>
+          </select>
+        </label>
+      </form>
+
+      <div class="label" style="padding-top:26px">Wie reist ihr an?</div>
+      <p style="color:#6f6a60;font-size:14px;margin:6px 0 14px">Mehrfachauswahl möglich. Noch unsicher? Dann unten "entscheide ich später" wählen — verbindliche Angabe spätestens 7 Tage vor Anreise.</p>
+      <div class="addon-grid" id="anreiseartGrid">
+        <label class="addon" data-anreise="oepnv">
+          <input type="checkbox" id="anreise-oepnv">
+          <div><strong>ÖPNV</strong><span>Ticket im Preis inklusive</span></div>
+        </label>
+        <label class="addon" data-anreise="fahrrad">
+          <input type="checkbox" id="anreise-fahrrad">
+          <div><strong>Fahrradstation</strong><span>Abstellplätze am Haus nutzen</span></div>
+        </label>
+        <label class="addon" data-anreise="shuttle">
+          <input type="checkbox" id="anreise-shuttle">
+          <div><strong>Shuttleservice</strong><span>Bahnhof Freiburg ⇄ Haus, 300 € pro Fahrt — direkt anfragen</span></div>
+        </label>
+        <label class="addon" data-anreise="pkw">
+          <input type="checkbox" id="anreise-pkw">
+          <div><strong>Privater PKW</strong><span>Parkplatz vor Ort</span></div>
+        </label>
+        <label class="addon wide" data-anreise="bus">
+          <input type="checkbox" id="anreise-bus">
+          <div>
+            <strong>Gruppen- / Charterbus</strong>
+            <span>Wird von der Gruppe selbst organisiert. Angebot und Buchung direkt beim Partnerbetrieb: <a class="addon-link" id="partnerBusLink" href="#" target="_blank" rel="noopener">Charterbus anfragen →</a></span>
+          </div>
+        </label>
+      </div>
+
+      <label class="addon" data-anreise="spaeter" style="margin-top:16px">
+        <input type="checkbox" id="anreise-spaeter">
+        <div><strong>Entscheide ich später</strong><span>Verbindliche Angabe spätestens 7 Tage vor Anreise nötig</span></div>
+      </label>
+
+      <!-- Shuttle-Anfrage: erscheint nur bei ausgewähltem Shuttle -->
+      <div class="shuttle-box" id="shuttleBox" hidden>
+        <strong>Shuttle direkt anfragen</strong>
+        <p>Bahnhof Freiburg ⇄ Uni-Haus, 300 € pro Fahrt. Die Fahrten werden für die im Kalender gewählten Tage angefragt und mit der Endrechnung abgerechnet.</p>
+
+        <div class="addon-grid" style="margin-top:0">
+          <label class="addon" data-shuttle="hin">
+            <input type="checkbox" id="shuttle-hin">
+            <div><strong>Fahrt zur Anreise</strong><span id="shuttleHinDate">Anreisetag noch nicht gewählt</span></div>
+          </label>
+          <label class="addon" data-shuttle="rueck">
+            <input type="checkbox" id="shuttle-rueck">
+            <div><strong>Fahrt zur Abreise</strong><span id="shuttleRueckDate">Abreisetag noch nicht gewählt</span></div>
+          </label>
+        </div>
+
+        <div class="shuttle-total" id="shuttleTotal">Noch keine Fahrt ausgewählt.</div>
+      </div>
+
+      <div class="wizard-actions">
+        <button class="btn secondary" style="background:#f4f1ea;color:#111" data-route="buchung-gruppe">← Zurück</button>
+        <button class="btn primary" id="terminNextBtn">Weiter →</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ BUCHUNG: SCHRITT 3 – ZUSATZLEISTUNGEN ============ -->
+<div class="page" id="page-buchung-zusatz">
+  <section class="booking-head">
+    <div class="tag">Buchung · Schritt 3 von 4</div>
+    <h1>Zusatzleistungen</h1>
+    <p>Frei kombinierbar — die Zwischensumme aktualisiert sich direkt.</p>
+  </section>
+
+  <section class="tight" style="padding-top:20px">
+    <div class="booking">
+      <div>
+        <div class="label" style="padding-top:0">Optional</div>
+        <h2 style="font-size:clamp(28px,3.4vw,44px)">Was braucht ihr vor Ort?</h2>
+        <p class="lead" style="font-size:18px">Sauna eignet sich für Retreats, Technik für Tagungen — je nach Zweck passend vorausgewählt.</p>
+      </div>
+
+      <div class="wizard-panel">
+        <div class="addon-grid">
+          <label class="addon" data-addon="sauna">
+            <input type="checkbox" id="addon-sauna">
+            <div><strong>Sauna & Spa</strong><span>25 € pauschal / Nacht</span></div>
+          </label>
+          <label class="addon" data-addon="vollpension">
+            <input type="checkbox" id="addon-vollpension">
+            <div><strong>Vollpension</strong><span>15 € / Person / Nacht</span></div>
+          </label>
+          <label class="addon" data-addon="technik">
+            <input type="checkbox" id="addon-technik">
+            <div><strong>Beamer & Flipchart</strong><span>20 € pauschal</span></div>
+          </label>
+          <label class="addon" data-addon="reinigung">
+            <input type="checkbox" id="addon-reinigung">
+            <div><strong>Professionelle Endreinigung</strong><span>60 € pauschal</span></div>
+          </label>
+        </div>
+
+        <div class="result" id="zwischensumme"></div>
+
+        <div class="wizard-actions">
+          <button class="btn secondary" style="background:#f4f1ea;color:#111" data-route="buchung-termin">← Zurück</button>
+          <button class="btn primary" data-route="buchung-uebersicht" id="zusatzNextBtn">Weiter →</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ BUCHUNG: SCHRITT 4 – ÜBERSICHT ============ -->
+<div class="page" id="page-buchung-uebersicht">
+  <section class="booking-head">
+    <div class="tag">Buchung · Schritt 4 von 4</div>
+    <h1>Übersicht & Bestätigung</h1>
+    <p>Letzter Check vor der verbindlichen Anfrage.</p>
+  </section>
+
+  <section class="tight" style="padding-top:20px">
+    <div class="booking">
+      <div>
+        <div class="label" style="padding-top:0">Zusammenfassung</div>
+        <h2 style="font-size:clamp(28px,3.4vw,44px)">Alles korrekt?</h2>
+        <p class="lead" style="font-size:17px">Einzelne Angaben lassen sich direkt bearbeiten, ohne den Fortschritt zu verlieren.</p>
+        <div class="warn-note" id="uebersichtWarn" hidden></div>
+      </div>
+
+      <div class="wizard-panel">
+        <div class="summary-list" id="summaryList"></div>
+        <div class="summary-total">
+          <span style="color:#6f6a60;font-size:15px" id="summaryTotalLabel">Gesamtpreis (Demo-Berechnung)</span>
+          <strong id="summaryTotal">0 €</strong>
+        </div>
+
+        <div class="wizard-actions">
+          <button class="btn secondary" style="background:#f4f1ea;color:#111" data-route="buchung-zusatz">← Zurück</button>
+          <button class="btn primary" id="confirmBtn">Verbindlich anfragen →</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ BUCHUNG: BESTÄTIGUNG ============ -->
+<div class="page" id="page-buchung-bestaetigung">
+  <section class="dark" style="padding-top:170px">
+    <div style="max-width:760px;margin:0 auto">
+      <div class="confirm-box" style="margin:0 auto">
+        <div class="confirm-ok" id="confirmIcon">✓</div>
+        <div class="label" style="padding-top:0" id="confirmLabel">Anfrage gesendet</div>
+        <h2 style="font-size:clamp(30px,4vw,48px)" id="confirmHeadline">Danke — wir melden uns.</h2>
+        <p class="lead" style="font-size:17px;margin-top:16px">Referenz <strong id="refNumber"></strong></p>
+
+        <div class="checklist" id="checklist"></div>
+
+        <div class="wizard-actions" style="justify-content:flex-start">
+          <button class="btn primary" data-route="home">Zur Startseite</button>
+          <button class="btn ghost-dark" data-route="preise">Preise ansehen</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+</main>
+
+<footer>
+  <div>
+    <strong>Uni-Haus Schauinsland</strong><br>
+    Buchungsportal · Retreat-Haus · Universität Freiburg
+  </div>
+
+  <nav>
+    <a>Impressum</a>
+    <a>Datenschutz</a>
+    <a>AGB</a>
+    <a>Hausordnung</a>
+  </nav>
+</footer>
+
+<script>
+/* ---------------- config ---------------- */
+/* TODO: echte URL des Partnerbetriebs eintragen */
+const PARTNER_BUS_URL = "https://www.example-busreisen-freiburg.de";
+const SHUTTLE_PRICE = 300;          // € pro Fahrt
+const PRIORITY_WEEKS = 5;           // Wochen Studi-Vorrang ab Semesterbeginn
+const WAITLIST_DECISION_WEEKS = 4;  // Zusage/Absage X Wochen vor Anreise
+
+/* ---------------- state ---------------- */
+const state = {
+  group: null,
+  start: "",
+  end: "",
+  people: 14,
+  purpose: "seminar",
+  usage: "overnight",
+  addons: { sauna:false, vollpension:false, technik:false, reinigung:false },
+  anreiseart: { oepnv:false, fahrrad:false, shuttle:false, pkw:false, bus:false, spaeter:false },
+  shuttle: { hin:false, rueck:false }
+};
+
+const RATES = { student:18, research:28, external:44 };
+const GROUP_LABEL = { student:"Studierende", research:"Forschungsgruppe", external:"Unternehmen / Externe" };
+const PURPOSE_LABEL = { seminar:"Seminar / Lehrveranstaltung", retreat:"Retreat / Gruppenfahrt", tagung:"Tagung / Workshop", event:"Event / Teambuilding" };
+const USAGE_LABEL = { overnight:"Übernachtung", seminar:"Seminarraum", both:"Übernachtung + Seminarraum" };
+const ANREISEART_LABEL = {
+  oepnv:"ÖPNV",
+  fahrrad:"Fahrradstation",
+  shuttle:"Shuttleservice",
+  pkw:"Privater PKW",
+  bus:"Gruppen-/Charterbus (selbst organisiert)",
+  spaeter:"Später festgelegt (spät. 7 Tage vor Anreise)"
+};
+const ANFAHRT_TEXT = {
+  student: "ÖPNV-Ticket ist im Preis inklusive. Empfohlen: Anreise mit Regiokarte, Haltestelle direkt am Haus.",
+  research: "ÖPNV wird empfohlen. Für Technik-Transport ist ein Parkplatz auf Anfrage reservierbar.",
+  external: "Parkplätze vor Ort gegen Aufpreis buchbar. Shuttle ab Bahnhof Freiburg direkt mitbuchbar (300 € pro Fahrt)."
+};
+
+const ADDON_META = {
+  sauna:{label:"Sauna & Spa", price:25, unit:"pauschal / Nacht"},
+  vollpension:{label:"Vollpension", price:15, unit:"€ / Person / Nacht"},
+  technik:{label:"Beamer & Flipchart", price:20, unit:"pauschal"},
+  reinigung:{label:"Prof. Endreinigung", price:60, unit:"pauschal"}
+};
+
+/* Semesterbeginn = Beginn der Vorlesungszeit (Quelle: uni-freiburg.de).
+   Die ersten PRIORITY_WEEKS Wochen ab diesem Datum sind für Studierende
+   reserviert. Alle übrigen Tage sind für alle drei Gruppen frei buchbar. */
+const SEMESTER_STARTS = [
+  { start:"2026-04-20", name:"SoSe 2026" },
+  { start:"2026-10-19", name:"WiSe 2026/27" },
+  { start:"2027-04-19", name:"SoSe 2027" },
+  { start:"2027-10-18", name:"WiSe 2027/28" },
+  { start:"2028-04-24", name:"SoSe 2028" }
+];
+
+const AVAILABILITY_TEXT = {
+  student: "Du kannst das ganze Jahr über buchen. In den ersten fünf Wochen jedes Semesters (hellgrün im Kalender) haben Studierende Vorrang — dort buchst du direkt und ohne Warteliste.",
+  research: "Ihr könnt das ganze Jahr über buchen. Nur die ersten fünf Wochen jedes Semesters (gelb im Kalender) sind für Studierende reserviert — dort ist eine Reservierung über die Warteliste möglich.",
+  external: "Sie können das ganze Jahr über buchen. Nur die ersten fünf Wochen jedes Semesters (gelb im Kalender) sind für Studierende reserviert — dort ist eine Reservierung über die Warteliste möglich."
+};
+
+const PRIORITY_TOOLTIP = "Dieser Zeitraum ist ausschließlich für Studierende reserviert. Eine Reservierung ist über die Warteliste möglich.";
+
+const ROUTES = ["home","ueber","zielgruppen","preise","faq",
+  "buchung-gruppe","buchung-termin","buchung-zusatz","buchung-uebersicht","buchung-bestaetigung"];
+
+const BOOKING_STEPS = [
+  {route:"buchung-gruppe", label:"Zielgruppe"},
+  {route:"buchung-termin", label:"Termin & Anfahrt"},
+  {route:"buchung-zusatz", label:"Zusatzleistungen"},
+  {route:"buchung-uebersicht", label:"Übersicht"}
+];
+
+document.getElementById("partnerBusLink").href = PARTNER_BUS_URL;
+
+/* ---------------- dates & Vorrangzeiträume ---------------- */
+const today = new Date(); today.setHours(0,0,0,0);
+const calView = { year: today.getFullYear(), month: today.getMonth() };
+const CAL_MIN = today.getFullYear()*12 + today.getMonth();
+const CAL_MAX = 2028*12 + 8; // September 2028
+
+const MONTH_NAMES = ["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"];
+
+function toDate(s){ return new Date(s + "T00:00:00"); }
+function fmtDate(y,m,d){ return y + "-" + String(m+1).padStart(2,"0") + "-" + String(d).padStart(2,"0"); }
+function fmtDE(s){ return s ? toDate(s).toLocaleDateString("de-DE",{weekday:"short",day:"2-digit",month:"2-digit",year:"numeric"}) : ""; }
+function fmtDEShort(s){ return s ? toDate(s).toLocaleDateString("de-DE",{day:"2-digit",month:"2-digit",year:"numeric"}) : ""; }
+function addDays(dateStr, n){
+  const d = toDate(dateStr);
+  d.setDate(d.getDate() + n);
+  return fmtDate(d.getFullYear(), d.getMonth(), d.getDate());
+}
+function isPastDate(dateStr){ return toDate(dateStr).getTime() < today.getTime(); }
+
+/* Vorrangzeitraum = Semesterstart bis Semesterstart + 5 Wochen (35 Tage, inklusive) */
+const PRIORITY_RANGES = SEMESTER_STARTS.map(s => ({
+  name: s.name,
+  from: s.start,
+  to: addDays(s.start, PRIORITY_WEEKS * 7 - 1)
+}));
+
+function priorityRangeFor(dateStr){
+  const t = toDate(dateStr).getTime();
+  return PRIORITY_RANGES.find(r => t >= toDate(r.from).getTime() && t <= toDate(r.to).getTime()) || null;
+}
+function isPriorityDay(dateStr){ return !!priorityRangeFor(dateStr); }
+
+/* Warteliste gilt für alle Gruppen außer Studierende */
+function isWaitlistDay(dateStr){ return state.group !== "student" && isPriorityDay(dateStr); }
+
+/* Berührt der gewählte Aufenthalt (Anreise .. Abreise) einen Vorrangtag? */
+function selectionTouchesPriority(){
+  if(!state.start || !state.end) return false;
+  let d = toDate(state.start);
+  const end = toDate(state.end);
+  while(d <= end){
+    if(isPriorityDay(fmtDate(d.getFullYear(), d.getMonth(), d.getDate()))) return true;
+    d.setDate(d.getDate() + 1);
+  }
+  return false;
+}
+function isWaitlistBooking(){ return state.group !== "student" && selectionTouchesPriority(); }
+
+function nightsBetween(){
+  if(!state.start || !state.end) return 0;
+  const ms = 24*60*60*1000;
+  const n = Math.round((new Date(state.end) - new Date(state.start)) / ms);
+  return n > 0 ? n : 0;
+}
+
+function shuttleTrips(){
+  if(!state.anreiseart.shuttle) return 0;
+  return (state.shuttle.hin ? 1 : 0) + (state.shuttle.rueck ? 1 : 0);
+}
+
+function shuttleCost(){
+  return shuttleTrips() * SHUTTLE_PRICE;
+}
+
+function calcTotal(){
+  const nights = Math.max(nightsBetween(), 1);
+  const rate = RATES[state.group] || RATES.student;
+  let price = nights * state.people * rate;
+
+  if(state.usage === "seminar"){ price = nights * 160; }
+  if(state.usage === "both"){ price += nights * 120; }
+
+  if(state.addons.sauna) price += nights * ADDON_META.sauna.price;
+  if(state.addons.vollpension) price += nights * state.people * ADDON_META.vollpension.price;
+  if(state.addons.technik) price += ADDON_META.technik.price;
+  if(state.addons.reinigung) price += ADDON_META.reinigung.price;
+
+  price += shuttleCost();
+
+  return Math.round(price);
+}
+
+/* ---------------- calendar ---------------- */
+function renderLegend(){
+  const isStudent = state.group === "student";
+  document.getElementById("calLegend").innerHTML = [
+    '<span><i class="dot free"></i>Frei buchbar</span>',
+    isStudent
+      ? '<span><i class="dot priority"></i>Vorrang für Studierende</span>'
+      : '<span><i class="dot waitlist"></i>Nur Warteliste (Studi-Vorrang)</span>',
+    '<span><i class="dot range"></i>Ausgewählt</span>'
+  ].join("");
+}
+
+function renderCalendar(){
+  const { year, month } = calView;
+  document.getElementById("calTitle").textContent = MONTH_NAMES[month] + " " + year;
+
+  const idx = year*12 + month;
+  document.getElementById("calPrev").disabled = idx <= CAL_MIN;
+  document.getElementById("calNext").disabled = idx >= CAL_MAX;
+
+  const firstDay = new Date(year, month, 1);
+  let startOffset = firstDay.getDay() - 1; // Monday = 0
+  if(startOffset < 0) startOffset = 6;
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+  let html = "";
+  for(let i = 0; i < startOffset; i++) html += '<div class="cal-cell pad"></div>';
+
+  for(let d = 1; d <= daysInMonth; d++){
+    const dateStr = fmtDate(year, month, d);
+    let cls = "cal-cell";
+    let clickable = false;
+    let title = "";
+
+    if(isPastDate(dateStr)){
+      cls += " past";
+    } else if(isWaitlistDay(dateStr)){
+      cls += " waitlist";           // Forschung & Externe: buchbar, aber nur über Warteliste
+      clickable = true;
+      title = PRIORITY_TOOLTIP;
+    } else if(isPriorityDay(dateStr)){
+      cls += " free priority";      // Studierende: Vorrangzeitraum, direkt buchbar
+      clickable = true;
+      title = "Vorrangzeitraum für Studierende — direkt buchbar.";
+    } else {
+      cls += " free";
+      clickable = true;
+      title = "Frei buchbar für alle Gruppen.";
+    }
+
+    if(state.start && dateStr > state.start && state.end && dateStr < state.end){
+      cls += " in-range";
+    }
+    if(dateStr === state.start || dateStr === state.end){
+      cls += " endpoint";
+    }
+
+    html += '<div class="' + cls + '"'
+      + (clickable ? ' data-date="' + dateStr + '"' : '')
+      + (title ? ' title="' + title + '"' : '')
+      + '>' + d + '</div>';
+  }
+
+  document.getElementById("calGrid").innerHTML = html;
+  renderLegend();
+  updateCalResult();
+  renderWaitlistNote();
+  renderShuttleBox();
+}
+
+/* Hover-Erklärung unterhalb des Kalenders */
+document.getElementById("calGrid").addEventListener("mouseover", function(e){
+  const cell = e.target.closest(".cal-cell");
+  if(!cell || cell.classList.contains("pad")) return;
+  const hint = document.getElementById("calHint");
+
+  if(cell.classList.contains("waitlist")){
+    hint.classList.add("warn");
+    hint.textContent = PRIORITY_TOOLTIP;
+  } else if(cell.classList.contains("priority")){
+    hint.classList.remove("warn");
+    hint.textContent = "Vorrangzeitraum für Studierende — als Studierende/r direkt buchbar.";
+  } else if(cell.classList.contains("past")){
+    hint.classList.remove("warn");
+    hint.textContent = "Vergangener Tag.";
+  } else {
+    hint.classList.remove("warn");
+    hint.textContent = "Frei buchbar für alle Gruppen.";
+  }
+});
+
+document.getElementById("calGrid").addEventListener("mouseleave", function(){
+  const hint = document.getElementById("calHint");
+  hint.classList.remove("warn");
+  hint.textContent = "Fahr über einen Tag, um Details zu sehen.";
+});
+
+function renderWaitlistNote(){
+  const note = document.getElementById("wartelisteNote");
+  if(!isWaitlistBooking()){ note.hidden = true; return; }
+
+  const range = priorityRangeFor(state.start) || priorityRangeFor(state.end);
+  note.hidden = false;
+  note.innerHTML =
+    "<strong>Wartelistenplatz statt Direktbuchung.</strong><br>"
+    + "Der gewählte Zeitraum liegt in den ersten " + PRIORITY_WEEKS + " Wochen des Semesters"
+    + (range ? " (" + range.name + ", " + fmtDEShort(range.from) + " – " + fmtDEShort(range.to) + ")" : "")
+    + " und ist vorrangig für Studierende reserviert. Die Anfrage wird vorgemerkt, aber nicht sofort bestätigt. "
+    + WAITLIST_DECISION_WEEKS + " Wochen vor Anreise erfolgt Zusage oder Absage — bis dahin fallen keine Kosten an.";
+}
+
+function updateCalResult(){
+  const el = document.getElementById("calResult");
+  if(state.start && state.end){
+    el.innerHTML = "Anreise <strong>" + fmtDEShort(state.start) + "</strong> · Abreise <strong>" + fmtDEShort(state.end)
+      + "</strong> · <strong>" + nightsBetween() + " Nacht/Nächte</strong>"
+      + (isWaitlistBooking() ? ' · <strong style="color:#7a5a17">Warteliste</strong>' : " ausgewählt.");
+  } else if(state.start){
+    el.innerHTML = "Anreise <strong>" + fmtDEShort(state.start) + "</strong> gewählt — jetzt Abreisetag im Kalender wählen.";
+  } else {
+    el.textContent = "Wähle Anreise- und Abreisetag im Kalender.";
+  }
+}
+
+document.getElementById("calGrid").addEventListener("click", function(e){
+  const cell = e.target.closest("[data-date]");
+  if(!cell) return;
+  const dateStr = cell.dataset.date;
+
+  if(!state.start || (state.start && state.end)){
+    state.start = dateStr;
+    state.end = "";
+  } else if(dateStr === state.start){
+    state.start = "";
+  } else if(dateStr > state.start){
+    state.end = dateStr;
+  } else {
+    state.start = dateStr;
+    state.end = "";
+  }
+  renderCalendar();
+});
+
+document.getElementById("calPrev").addEventListener("click", function(){
+  calView.month--;
+  if(calView.month < 0){ calView.month = 11; calView.year--; }
+  renderCalendar();
+});
+
+document.getElementById("calNext").addEventListener("click", function(){
+  calView.month++;
+  if(calView.month > 11){ calView.month = 0; calView.year++; }
+  renderCalendar();
+});
+
+/* ---------------- routing ---------------- */
+function navigate(route){
+
+  if(!ROUTES.includes(route)) route = "home";
+  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+  document.getElementById("page-" + route).classList.add("active");
+  window.scrollTo({top:0, behavior:"auto"});
+
+  document.querySelectorAll("nav a[data-route]").forEach(a => {
+    a.classList.toggle("active", a.dataset.route === route);
+  });
+
+  const isBooking = route.startsWith("buchung-") && route !== "buchung-bestaetigung";
+  document.getElementById("stepperWrap").classList.toggle("active", isBooking);
+  if(isBooking) renderStepper(route);
+
+  if(route === "buchung-termin") renderTermin();
+  if(route === "buchung-zusatz") renderZusatz();
+  if(route === "buchung-uebersicht") renderUebersicht();
+
+  const btn = document.getElementById("headerBookBtn");
+  btn.textContent = state.group ? "Weiter buchen" : "Buchen";
+
+  location.hash = route;
+}
+
+function renderStepper(currentRoute){
+  const idx = BOOKING_STEPS.findIndex(s => s.route === currentRoute);
+  let html = '<span class="crumb home-link" data-route="home">Start</span>';
+  BOOKING_STEPS.forEach((s,i) => {
+    const cls = i === idx ? "current" : (i < idx ? "done" : "");
+    const attr = i === idx ? ' aria-current="step"' : ' data-route="' + s.route + '"';
+    html += '<span class="crumb ' + cls + '"' + attr + '>' + (i+1) + '. ' + s.label + '</span>';
+    if(i < BOOKING_STEPS.length - 1) html += '<span class="sep">/</span>';
+  });
+  document.getElementById("stepper").innerHTML = html;
+}
+
+/* ---------------- group selection ---------------- */
+function selectGroup(group, nextRoute){
+  // Zeitraum bleibt erhalten: alle Tage sind für alle Gruppen wählbar,
+  // nur der Status (Direktbuchung vs. Warteliste) ändert sich.
+  state.group = group;
+  document.querySelectorAll("[data-select-group]").forEach(el => {
+    el.classList.toggle("selected", el.dataset.selectGroup === group);
+  });
+  if(nextRoute) navigate(nextRoute);
+}
+
+/* ---------------- schritt 2: termin ---------------- */
+function renderTermin(){
+  document.getElementById("people").value = state.people;
+  document.getElementById("purpose").value = state.purpose;
+  document.getElementById("usageType").value = state.usage;
+  document.getElementById("anfahrtNote").textContent = ANFAHRT_TEXT[state.group] || ANFAHRT_TEXT.student;
+  document.getElementById("verfuegbarkeitTitle").textContent =
+    state.group === "student" ? "Ganzjährig buchbar — mit Vorrang" : "Ganzjährig buchbar";
+  document.getElementById("verfuegbarkeitText").textContent =
+    AVAILABILITY_TEXT[state.group] || AVAILABILITY_TEXT.student;
+  document.getElementById("termin-sub").textContent =
+    "Zeitraum, Gruppengröße, Zweck und Anreiseart für " + (GROUP_LABEL[state.group] || "deine Gruppe") + ".";
+
+  Object.keys(state.anreiseart).forEach(key => {
+    const box = document.getElementById("anreise-" + key);
+    box.checked = state.anreiseart[key];
+    box.closest(".addon").classList.toggle("checked", state.anreiseart[key]);
+  });
+
+  // Kalenderansicht auf den gewählten Anreisemonat springen (falls vorhanden)
+  if(state.start){
+    const d = toDate(state.start);
+    calView.year = d.getFullYear();
+    calView.month = d.getMonth();
+  }
+  renderCalendar();
+}
+
+/* ---------------- shuttle ---------------- */
+function renderShuttleBox(){
+  const box = document.getElementById("shuttleBox");
+  if(!box) return;
+
+  const active = state.anreiseart.shuttle;
+  box.hidden = !active;
+
+  if(!active){
+    state.shuttle.hin = false;
+    state.shuttle.rueck = false;
+  }
+
+  document.getElementById("shuttleHinDate").textContent =
+    state.start ? "Ankunft am " + fmtDE(state.start) : "Anreisetag noch nicht gewählt";
+  document.getElementById("shuttleRueckDate").textContent =
+    state.end ? "Rückfahrt am " + fmtDE(state.end) : "Abreisetag noch nicht gewählt";
+
+  ["hin","rueck"].forEach(key => {
+    const el = document.querySelector('[data-shuttle="' + key + '"]');
+    const input = el.querySelector("input");
+    input.checked = state.shuttle[key];
+    el.classList.toggle("checked", state.shuttle[key]);
+  });
+
+  const trips = shuttleTrips();
+  document.getElementById("shuttleTotal").innerHTML = trips
+    ? trips + " Fahrt/Fahrten × " + SHUTTLE_PRICE + " € = <strong>" + shuttleCost().toLocaleString("de-DE") + " €</strong> (im Gesamtpreis enthalten)"
+    : "Noch keine Fahrt ausgewählt.";
+}
+
+document.querySelectorAll('[data-shuttle]').forEach(function(el){
+  el.addEventListener("click", function(e){
+    if(e.target.tagName !== "INPUT"){
+      const box = el.querySelector("input");
+      box.checked = !box.checked;
+    }
+    state.shuttle[el.dataset.shuttle] = el.querySelector("input").checked;
+    renderShuttleBox();
+  });
+});
+
+/* ---------------- anreisearten ---------------- */
+document.querySelectorAll('[data-anreise]').forEach(function(el){
+  el.addEventListener("click", function(e){
+    // Klick auf den Partner-Link soll die Checkbox nicht togglen
+    if(e.target.closest("a")) return;
+
+    if(e.target.tagName !== "INPUT"){
+      const box = el.querySelector("input");
+      box.checked = !box.checked;
+    }
+    const key = el.dataset.anreise;
+    const checked = el.querySelector("input").checked;
+
+    if(key === "spaeter" && checked){
+      // "später" schließt konkrete Anreisearten aus
+      ["oepnv","fahrrad","shuttle","pkw","bus"].forEach(function(k){
+        state.anreiseart[k] = false;
+        const b = document.getElementById("anreise-" + k);
+        b.checked = false;
+        b.closest(".addon").classList.remove("checked");
+      });
+    } else if(key !== "spaeter" && checked){
+      state.anreiseart.spaeter = false;
+      const b = document.getElementById("anreise-spaeter");
+      b.checked = false;
+      b.closest(".addon").classList.remove("checked");
+    }
+
+    state.anreiseart[key] = checked;
+    el.classList.toggle("checked", checked);
+    renderShuttleBox();
+  });
+});
+
+document.getElementById("terminNextBtn").addEventListener("click", function(){
+  if(!state.start || !state.end){
+    alert("Bitte Anreise- und Abreisetag im Kalender wählen.");
+    return;
+  }
+  const anyAnreise = Object.values(state.anreiseart).some(v => v);
+  if(!anyAnreise){
+    alert("Bitte eine Anreiseart wählen — oder \u201eEntscheide ich später\u201c ankreuzen.");
+    return;
+  }
+  if(state.anreiseart.shuttle && shuttleTrips() === 0){
+    alert("Bitte mindestens eine Shuttle-Fahrt (Anreise und/oder Abreise) wählen — oder den Shuttleservice abwählen.");
+    return;
+  }
+  state.people = Number(document.getElementById("people").value) || 1;
+  state.purpose = document.getElementById("purpose").value;
+  state.usage = document.getElementById("usageType").value;
+  navigate("buchung-zusatz");
+});
+
+/* ---------------- schritt 3: zusatzleistungen ---------------- */
+function renderZusatz(){
+  Object.keys(ADDON_META).forEach(key => {
+    const box = document.getElementById("addon-" + key);
+    box.checked = state.addons[key];
+    box.closest(".addon").classList.toggle("checked", state.addons[key]);
+  });
+  updateZwischensumme();
+}
+
+function updateZwischensumme(){
+  const nights = Math.max(nightsBetween(), 1);
+  let addonSum = 0;
+  if(state.addons.sauna) addonSum += nights * ADDON_META.sauna.price;
+  if(state.addons.vollpension) addonSum += nights * state.people * ADDON_META.vollpension.price;
+  if(state.addons.technik) addonSum += ADDON_META.technik.price;
+  if(state.addons.reinigung) addonSum += ADDON_META.reinigung.price;
+
+  let html = "Zusatzleistungen: <strong>" + addonSum.toLocaleString("de-DE") + " €</strong><br>";
+  if(shuttleTrips()){
+    html += "Shuttle (" + shuttleTrips() + " Fahrt/Fahrten): <strong>" + shuttleCost().toLocaleString("de-DE") + " €</strong><br>";
+  }
+  html += "Gesamtsumme inkl. Aufenthalt (Demo): <strong>" + calcTotal().toLocaleString("de-DE") + " €</strong>";
+  if(isWaitlistBooking()){
+    html += "<br><span style='color:#7a5a17'>Wartelistenplatz — der Betrag wird erst nach Zusage fällig.</span>";
+  }
+
+  document.getElementById("zwischensumme").innerHTML = html;
+}
+
+document.querySelectorAll(".addon[data-addon]").forEach(addonEl => {
+  addonEl.addEventListener("click", function(e){
+    if(e.target.tagName !== "INPUT"){
+      const box = addonEl.querySelector("input");
+      box.checked = !box.checked;
+    }
+    const key = addonEl.dataset.addon;
+    state.addons[key] = addonEl.querySelector("input").checked;
+    addonEl.classList.toggle("checked", state.addons[key]);
+    updateZwischensumme();
+  });
+});
+
+/* ---------------- schritt 4: übersicht ---------------- */
+function renderUebersicht(){
+  const nights = Math.max(nightsBetween(), 1);
+  const waitlist = isWaitlistBooking();
+  const addonNames = Object.keys(state.addons).filter(k => state.addons[k]).map(k => ADDON_META[k].label);
+  const anreiseNames = Object.keys(state.anreiseart).filter(k => state.anreiseart[k]).map(k => ANREISEART_LABEL[k]);
+
+  const rows = [
+    ["Zielgruppe", GROUP_LABEL[state.group] || "—", "buchung-gruppe", false],
+    ["Status", waitlist ? "Warteliste (Vorrang für Studierende)" : "Direkt buchbar", "buchung-termin", waitlist],
+    ["Zeitraum", state.start && state.end ? (fmtDEShort(state.start) + " – " + fmtDEShort(state.end) + " · " + nights + " Nacht/Nächte") : "—", "buchung-termin", false],
+    ["Personen", state.people + " Personen", "buchung-termin", false],
+    ["Zweck", PURPOSE_LABEL[state.purpose], "buchung-termin", false],
+    ["Nutzung", USAGE_LABEL[state.usage], "buchung-termin", false],
+    ["Anreiseart", anreiseNames.length ? anreiseNames.join(", ") : "—", "buchung-termin", false]
+  ];
+
+  if(shuttleTrips()){
+    const fahrten = [];
+    if(state.shuttle.hin) fahrten.push("Anreise " + fmtDEShort(state.start));
+    if(state.shuttle.rueck) fahrten.push("Abreise " + fmtDEShort(state.end));
+    rows.push(["Shuttle-Anfrage", fahrten.join(" · ") + " — " + shuttleCost().toLocaleString("de-DE") + " €", "buchung-termin", false]);
+  }
+
+  if(state.anreiseart.bus){
+    rows.push(["Charterbus", "Selbst zu organisieren (Partnerbetrieb)", "buchung-termin", false]);
+  }
+
+  rows.push(["Zusatzleistungen", addonNames.length ? addonNames.join(", ") : "keine", "buchung-zusatz", false]);
+
+  document.getElementById("summaryList").innerHTML = rows.map(r =>
+    '<div class="summary-row' + (r[3] ? " warn" : "") + '"><span>' + r[0] + ': <strong>' + r[1] + '</strong></span>' +
+    '<span class="edit" data-route="' + r[2] + '">Bearbeiten</span></div>'
+  ).join("");
+
+  document.getElementById("summaryTotal").textContent = calcTotal().toLocaleString("de-DE") + " €";
+  document.getElementById("summaryTotalLabel").textContent =
+    waitlist ? "Voraussichtlicher Preis (fällig erst nach Zusage)" : "Gesamtpreis (Demo-Berechnung)";
+
+  const warn = document.getElementById("uebersichtWarn");
+  warn.hidden = !waitlist;
+  if(waitlist){
+    warn.innerHTML = "<strong>Diese Anfrage ist eine Wartelisten-Reservierung.</strong><br>"
+      + "Der Zeitraum ist vorrangig für Studierende reserviert. Zusage oder Absage erfolgt "
+      + WAITLIST_DECISION_WEEKS + " Wochen vor Anreise. Es wird nichts abgebucht, es entstehen keine Stornokosten.";
+  }
+
+  const btn = document.getElementById("confirmBtn");
+  btn.textContent = waitlist ? "Auf Warteliste setzen →" : "Verbindlich anfragen →";
+  btn.classList.toggle("waitlist", waitlist);
+  btn.classList.toggle("primary", !waitlist);
+}
+
+document.getElementById("confirmBtn").addEventListener("click", function(){
+  const waitlist = isWaitlistBooking();
+
+  document.getElementById("refNumber").textContent =
+    "#UH-" + (waitlist ? "WL-" : "") + new Date().getFullYear() + "-" + Math.floor(1000 + Math.random()*9000);
+
+  document.getElementById("confirmIcon").textContent = waitlist ? "⏳" : "✓";
+  document.getElementById("confirmIcon").classList.toggle("waitlist", waitlist);
+  document.getElementById("confirmLabel").textContent = waitlist ? "Auf der Warteliste" : "Anfrage gesendet";
+  document.getElementById("confirmHeadline").textContent = waitlist
+    ? "Vorgemerkt — wir melden uns rechtzeitig."
+    : "Danke — wir melden uns.";
+
+  const checklistItems = [];
+
+  if(waitlist){
+    const range = priorityRangeFor(state.start) || priorityRangeFor(state.end);
+    checklistItems.push(["Wartelistenplatz vorgemerkt",
+      "Der Zeitraum" + (range ? " (" + range.name + ")" : "") + " ist vorrangig für Studierende reserviert. Zusage oder Absage bis zum "
+      + fmtDEShort(addDays(state.start, -WAITLIST_DECISION_WEEKS * 7)) + ", also " + WAITLIST_DECISION_WEEKS + " Wochen vor Anreise.", true]);
+    checklistItems.push(["Keine Zahlung, keine Stornokosten",
+      "Bis zur Zusage wird nichts abgebucht. Bei Absage schlagen wir freie Alternativtermine vor.", true]);
+  } else {
+    checklistItems.push(["Bestätigungsmail", "Buchungsdetails und Rechnung gehen an deine Uni- bzw. Firmen-E-Mail.", false]);
+  }
+
+  if(shuttleTrips()){
+    checklistItems.push(["Shuttle angefragt",
+      shuttleTrips() + " Fahrt/Fahrten × " + SHUTTLE_PRICE + " € (" + shuttleCost().toLocaleString("de-DE") + " €). Bestätigung der Abfahrtszeiten folgt per Mail.", false]);
+  }
+
+  if(state.anreiseart.bus){
+    checklistItems.push(["Charterbus selbst organisieren",
+      'Der Bus wird nicht über das Uni-Haus gebucht. Anfrage direkt beim Partnerbetrieb: <a href="' + PARTNER_BUS_URL + '" target="_blank" rel="noopener">Charterbus anfragen</a>.', false]);
+  }
+
+  if(state.anreiseart.spaeter){
+    checklistItems.push(["Anreiseart nachtragen",
+      "Verbindlich bis spätestens 7 Tage vor Anreise (" + fmtDEShort(state.start) + ") im Buchungsportal angeben.", false]);
+  }
+
+  checklistItems.push(["Infos zu Haftung & Versicherung", "Folgen automatisch per Mail vor der Anreise.", false]);
+  checklistItems.push(["Online Check-in", "Ausfüllen ca. 48 Stunden vor Anreise.", false]);
+  checklistItems.push(["Zugangscode", "Wird kurz vor Anreise freigeschaltet.", false]);
+
+  document.getElementById("checklist").innerHTML = checklistItems.map(c =>
+    '<div class="item' + (c[2] ? " warn" : "") + '"><span class="dot"></span><div><strong>' + c[0] + '</strong><span>' + c[1] + '</span></div></div>'
+  ).join("");
+
+  navigate("buchung-bestaetigung");
+});
+
+
+/* ---------------- global click handling ---------------- */
+document.addEventListener("click", function(e){
+  const groupEl = e.target.closest("[data-select-group]");
+  if(groupEl){
+    e.preventDefault();
+    selectGroup(groupEl.dataset.selectGroup, groupEl.dataset.next);
+    return;
+  }
+
+  if(e.target.closest("a[href^='http']")) return;
+
+  const routeEl = e.target.closest("[data-route]");
+  if(routeEl){
+    e.preventDefault();
+    navigate(routeEl.dataset.route);
+  }
+});
+
+document.getElementById("headerBookBtn").addEventListener("click", function(){
+  navigate(state.group ? "buchung-termin" : "buchung-gruppe");
+});
+
+/* ---------------- init ---------------- */
+window.addEventListener("hashchange", function(){
+  navigate(location.hash.slice(1));
+});
+
+navigate(location.hash.slice(1) || "home");
+</script>
+
+</body>
+</html>
