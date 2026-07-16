@@ -77,7 +77,7 @@ nav a.active{color:#12382a;font-weight:400}
 /* ---------- stepper (booking pages) ---------- */
 .stepper-wrap{
   position:fixed;
-  top:106px;               /* sitzt sauber UNTER dem Header (Header endet bei ~95px) */
+  top:106px;
   left:50%;
   transform:translateX(-50%);
   width:calc(100% - 64px);
@@ -154,7 +154,7 @@ nav a.active{color:#12382a;font-weight:400}
 }
 
 .booking-head{
-  padding:180px 7vw 8px;   /* Platz für Header + Stepper */
+  padding:180px 7vw 8px;
   color:#111;
 }
 
@@ -719,8 +719,6 @@ button{
 .cal-cell.free{cursor:pointer;transition:background .15s ease}
 .cal-cell.free:hover{background:#e8dfcf}
 
-/* Studi-Vorrang: für Studierende normal buchbar (hell markiert),
-   für andere Gruppen nur über die Warteliste (gelb markiert) */
 .cal-cell.priority{background:#eaf6ea;color:#12382a}
 .cal-cell.priority:hover{background:#d5eed5}
 .cal-cell.waitlist{background:#f7e6c4;color:#7a5a17;cursor:pointer;transition:background .15s ease}
@@ -841,10 +839,9 @@ button{
   border-radius:48px;
   padding:56px;
   box-shadow:0 28px 90px rgba(0,0,0,.09);
-  color:#111;                     /* Fix: erbte vorher Weiß aus .dark */
+  color:#111;
 }
 
-/* Textfarben innerhalb der weißen Box explizit setzen */
 .confirm-box h2,
 .confirm-box strong{color:#111}
 .confirm-box .label{color:#285b43}
@@ -1071,7 +1068,7 @@ footer nav{gap:20px}
     </div>
     <div class="stat">
       <strong>5</strong>
-      <span>Wochen zu Semesterbeginn mit Vorrang für Studierende</span>
+      <span>Wochen zu Semesterbeginn mit Vorrang für Fachschaften/Studierende</span>
     </div>
     <div class="stat">
       <strong>24/7</strong>
@@ -1092,7 +1089,7 @@ footer nav{gap:20px}
       <article class="card">
         <span class="number">01</span>
         <div>
-          <h3>Studierende & Fachschaften</h3>
+          <h3>Fachschaften/Studierende</h3>
           <p>Wochenenden, Projektphasen, Gruppenfahrten und selbstorganisierte Aufenthalte. Vorrang in den ersten fünf Semesterwochen.</p>
         </div>
         <span class="card-link" data-route="zielgruppen">Mehr erfahren →</span>
@@ -1101,7 +1098,7 @@ footer nav{gap:20px}
       <article class="card">
         <span class="number">02</span>
         <div>
-          <h3>Forschungsgruppen</h3>
+          <h3>Uni-interne Gruppen</h3>
           <p>Blockseminare, Workshops und konzentrierte Arbeitsphasen außerhalb des Campus.</p>
         </div>
         <span class="card-link" data-route="zielgruppen">Mehr erfahren →</span>
@@ -1127,7 +1124,7 @@ footer nav{gap:20px}
       <div class="label">Buchungslogik</div>
       <div>
         <h2>Ganzjährig offen — mit einem Vorrecht.</h2>
-        <p class="lead">Alle drei Gruppen buchen das ganze Jahr über nach denselben Regeln. Nur die ersten fünf Wochen jedes Semesters gehören zuerst den Studierenden; Forschungsgruppen und Externe kommen dort auf die Warteliste.</p>
+        <p class="lead">Alle drei Gruppen buchen das ganze Jahr über nach denselben Regeln. Nur die ersten fünf Wochen jedes Semesters gehören zuerst den Fachschaften/Studierenden; uni-interne Gruppen und Externe kommen dort auf die Warteliste.</p>
       </div>
     </div>
 
@@ -1135,7 +1132,7 @@ footer nav{gap:20px}
       <article class="step">
         <span>01</span>
         <h3>Zielgruppe wählen</h3>
-        <p>Studierende, Forschungsgruppe oder Unternehmen/Extern.</p>
+        <p>Fachschaften/Studierende, uni-interne Gruppe oder Unternehmen/Extern.</p>
       </article>
 
       <article class="step">
@@ -1241,7 +1238,7 @@ footer nav{gap:20px}
         <span class="number">ÖPNV</span>
         <div>
           <h3>Bus & Bahn</h3>
-          <p>Für Studierende im Preis inklusive. Klare Route, letzte Verbindung, Haltestelleninfo.</p>
+          <p>Für Fachschaften/Studierende im Preis inklusive. Klare Route, letzte Verbindung, Haltestelleninfo.</p>
         </div>
       </article>
 
@@ -1280,7 +1277,7 @@ footer nav{gap:20px}
     <div class="group-grid">
       <article class="group-card" data-select-group="student">
         <span class="icon">🎓</span>
-        <h3>Studierende</h3>
+        <h3>Fachschaften/Studierende</h3>
         <p>Wochenenden, Projektphasen, Fachschaftsfahrten. Niedrigschwelliger Zugang, begrenztes Budget.</p>
         <ul class="card-list">
           <li>Vorrang in den ersten 5 Semesterwochen</li>
@@ -1293,7 +1290,7 @@ footer nav{gap:20px}
 
       <article class="group-card" data-select-group="research">
         <span class="icon">🔬</span>
-        <h3>Forschungsgruppen</h3>
+        <h3>Uni-interne Gruppen</h3>
         <p>Blockseminare, Tagungen, Workshops. Verlässliche Planung, technische Ausstattung im Fokus.</p>
         <ul class="card-list">
           <li>Ganzjährig buchbar, Warteliste in den ersten 5 Semesterwochen</li>
@@ -1339,7 +1336,7 @@ footer nav{gap:20px}
         <ul>
           <li>Haupt- und Nebensaison</li>
           <li>Wochenende, Wochentage und Feiertage</li>
-          <li>Studierende, Forschungsgruppen und Externe</li>
+          <li>Fachschaften/Studierende, uni-interne Gruppen und Externe</li>
           <li>Zimmer, Seminarraum oder Kombination</li>
           <li>Zusatzleistungen: Sauna, Vollpension, Technik, Reinigung</li>
           <li>Mobilität: Shuttle 300 € pro Fahrt</li>
@@ -1363,8 +1360,8 @@ footer nav{gap:20px}
         <tr><th>Zielgruppe</th><th>Preis pro Person/Nacht</th><th>Kaution</th><th>Erste 5 Semesterwochen</th></tr>
       </thead>
       <tbody>
-        <tr><td>Studierende</td><td>18 €</td><td>keine</td><td>Vorrang, direkt buchbar</td></tr>
-        <tr><td>Forschungsgruppen</td><td>28 €</td><td>je nach Fakultät</td><td>nur Warteliste</td></tr>
+        <tr><td>Fachschaften/Studierende</td><td>18 €</td><td>keine</td><td>Vorrang, direkt buchbar</td></tr>
+        <tr><td>Uni-interne Gruppen</td><td>28 €</td><td>je nach Fakultät</td><td>nur Warteliste</td></tr>
         <tr><td>Unternehmen & Externe</td><td>44 €</td><td>ja</td><td>nur Warteliste</td></tr>
       </tbody>
     </table>
@@ -1374,7 +1371,7 @@ footer nav{gap:20px}
         <tr><th>Mobilität</th><th>Preis</th><th>Buchung</th></tr>
       </thead>
       <tbody>
-        <tr><td>ÖPNV</td><td>Studierende inklusive</td><td>im Buchungsprozess</td></tr>
+        <tr><td>ÖPNV</td><td>Fachschaften/Studierende inklusive</td><td>im Buchungsprozess</td></tr>
         <tr><td>Shuttle Bahnhof Freiburg ⇄ Haus</td><td>300 € pro Fahrt</td><td>direkt mitbuchbar</td></tr>
         <tr><td>Gruppen-/Charterbus</td><td>nach Angebot des Partnerbetriebs</td><td>selbst organisiert</td></tr>
       </tbody>
@@ -1406,12 +1403,17 @@ footer nav{gap:20px}
     <div>
       <details open>
         <summary>Wer darf wann buchen?</summary>
-        <p>Grundsätzlich alle drei Gruppen an allen Tagen. Ausnahme: die ersten fünf Wochen jedes Semesters sind für Studierende reserviert. Forschungsgruppen und Externe können sich für diesen Zeitraum auf die Warteliste setzen lassen.</p>
+        <p>Grundsätzlich alle drei Gruppen an allen Tagen. Ausnahme: die ersten fünf Wochen jedes Semesters sind für Fachschaften/Studierende reserviert. Uni-interne Gruppen und Externe können sich für diesen Zeitraum auf die Warteliste setzen lassen.</p>
       </details>
 
       <details>
         <summary>Was bedeutet ein Wartelistenplatz konkret?</summary>
         <p>Der Zeitraum wird unverbindlich vorgemerkt, es wird nichts abgebucht und es entstehen keine Stornokosten. Vier Wochen vor Anreise entscheidet das System: Zusage und normale Buchung, oder Absage mit Vorschlag für Alternativtermine.</p>
+      </details>
+
+      <details>
+        <summary>Gibt es eine Mindestgruppengröße?</summary>
+        <p>Ja, eine Buchung ist ab mindestens 8 Personen möglich. Für kleinere Gruppen lohnt sich das Haus wirtschaftlich nicht.</p>
       </details>
 
       <details>
@@ -1431,7 +1433,7 @@ footer nav{gap:20px}
 
       <details>
         <summary>Wie unterscheidet sich der Buchungsprozess je Zielgruppe?</summary>
-        <p>Studierende erhalten reduzierten Tarif und ÖPNV inklusive, Forschungsgruppen können Technik hinzubuchen, Unternehmen/Externe zahlen den vollen Tarif inkl. Kaution und Parkplatz-/Shuttle-Optionen.</p>
+        <p>Fachschaften/Studierende erhalten reduzierten Tarif und ÖPNV inklusive, uni-interne Gruppen können Technik hinzubuchen, Unternehmen/Externe zahlen den vollen Tarif inkl. Kaution und Parkplatz-/Shuttle-Optionen.</p>
       </details>
 
       <details>
@@ -1460,13 +1462,13 @@ footer nav{gap:20px}
     <div class="group-grid">
       <article class="group-card" data-select-group="student" data-next="buchung-termin">
         <span class="icon">🎓</span>
-        <h3>Studierende</h3>
+        <h3>Fachschaften/Studierende</h3>
         <p>Wochenenden, Projektphasen, Fachschaftsfahrten.</p>
       </article>
 
       <article class="group-card" data-select-group="research" data-next="buchung-termin">
         <span class="icon">🔬</span>
-        <h3>Forschungsgruppen</h3>
+        <h3>Uni-interne Gruppen</h3>
         <p>Blockseminare, Tagungen, Workshops.</p>
       </article>
 
@@ -1519,8 +1521,8 @@ footer nav{gap:20px}
 
       <form id="terminForm" style="margin-top:30px">
         <div class="form-grid">
-          <label>Personen
-            <input type="number" id="people" min="1" max="80" value="14">
+          <label>Personen (mind. 8)
+            <input type="number" id="people" min="8" max="80" value="14">
           </label>
           <label>Zweck
             <select id="purpose">
@@ -1541,56 +1543,63 @@ footer nav{gap:20px}
         </label>
       </form>
 
-      <div class="label" style="padding-top:26px">Wie reist ihr an?</div>
-      <p style="color:#6f6a60;font-size:14px;margin:6px 0 14px">Mehrfachauswahl möglich. Noch unsicher? Dann unten "entscheide ich später" wählen — verbindliche Angabe spätestens 7 Tage vor Anreise.</p>
-      <div class="addon-grid" id="anreiseartGrid">
-        <label class="addon" data-anreise="oepnv">
-          <input type="checkbox" id="anreise-oepnv">
-          <div><strong>ÖPNV</strong><span>Ticket im Preis inklusive</span></div>
-        </label>
-        <label class="addon" data-anreise="fahrrad">
-          <input type="checkbox" id="anreise-fahrrad">
-          <div><strong>Fahrradstation</strong><span>Abstellplätze am Haus nutzen</span></div>
-        </label>
-        <label class="addon" data-anreise="shuttle">
-          <input type="checkbox" id="anreise-shuttle">
-          <div><strong>Shuttleservice</strong><span>Bahnhof Freiburg ⇄ Haus, 300 € pro Fahrt — direkt anfragen</span></div>
-        </label>
-        <label class="addon" data-anreise="pkw">
-          <input type="checkbox" id="anreise-pkw">
-          <div><strong>Privater PKW</strong><span>Parkplatz vor Ort</span></div>
-        </label>
-        <label class="addon wide" data-anreise="bus">
-          <input type="checkbox" id="anreise-bus">
-          <div>
-            <strong>Gruppen- / Charterbus</strong>
-            <span>Wird von der Gruppe selbst organisiert. Angebot und Buchung direkt beim Partnerbetrieb: <a class="addon-link" id="partnerBusLink" href="#" target="_blank" rel="noopener">Charterbus anfragen →</a></span>
-          </div>
-        </label>
-      </div>
-
-      <label class="addon" data-anreise="spaeter" style="margin-top:16px">
-        <input type="checkbox" id="anreise-spaeter">
-        <div><strong>Entscheide ich später</strong><span>Verbindliche Angabe spätestens 7 Tage vor Anreise nötig</span></div>
+      <div class="label" style="padding-top:26px">Anreiseplanung</div>
+      <label class="addon" data-anreise-toggle style="margin-top:6px">
+        <input type="checkbox" id="anreise-planen">
+        <div><strong>Willst du die Anreise mit uns planen?</strong><span>Optionen zu ÖPNV, Fahrrad, Shuttle, PKW und Bus erscheinen nach dem Ankreuzen.</span></div>
       </label>
 
-      <!-- Shuttle-Anfrage: erscheint nur bei ausgewähltem Shuttle -->
-      <div class="shuttle-box" id="shuttleBox" hidden>
-        <strong>Shuttle direkt anfragen</strong>
-        <p>Bahnhof Freiburg ⇄ Uni-Haus, 300 € pro Fahrt. Die Fahrten werden für die im Kalender gewählten Tage angefragt und mit der Endrechnung abgerechnet.</p>
-
-        <div class="addon-grid" style="margin-top:0">
-          <label class="addon" data-shuttle="hin">
-            <input type="checkbox" id="shuttle-hin">
-            <div><strong>Fahrt zur Anreise</strong><span id="shuttleHinDate">Anreisetag noch nicht gewählt</span></div>
+      <div id="anreiseartOptionen" hidden>
+        <p style="color:#6f6a60;font-size:14px;margin:16px 0 14px">Mehrfachauswahl möglich. Noch unsicher? Dann unten "entscheide ich später" wählen — verbindliche Angabe spätestens 7 Tage vor Anreise.</p>
+        <div class="addon-grid" id="anreiseartGrid">
+          <label class="addon" data-anreise="oepnv">
+            <input type="checkbox" id="anreise-oepnv">
+            <div><strong>ÖPNV</strong><span>Ticket im Preis inklusive</span></div>
           </label>
-          <label class="addon" data-shuttle="rueck">
-            <input type="checkbox" id="shuttle-rueck">
-            <div><strong>Fahrt zur Abreise</strong><span id="shuttleRueckDate">Abreisetag noch nicht gewählt</span></div>
+          <label class="addon" data-anreise="fahrrad">
+            <input type="checkbox" id="anreise-fahrrad">
+            <div><strong>Fahrradstation</strong><span>Abstellplätze am Haus nutzen</span></div>
+          </label>
+          <label class="addon" data-anreise="shuttle">
+            <input type="checkbox" id="anreise-shuttle">
+            <div><strong>Shuttleservice</strong><span>Bahnhof Freiburg ⇄ Haus, 300 € pro Fahrt — direkt anfragen</span></div>
+          </label>
+          <label class="addon" data-anreise="pkw">
+            <input type="checkbox" id="anreise-pkw">
+            <div><strong>Privater PKW</strong><span>Parkplatz vor Ort</span></div>
+          </label>
+          <label class="addon wide" data-anreise="bus">
+            <input type="checkbox" id="anreise-bus">
+            <div>
+              <strong>Gruppen- / Charterbus</strong>
+              <span>Wird von der Gruppe selbst organisiert. Angebot und Buchung direkt beim Partnerbetrieb: <a class="addon-link" id="partnerBusLink" href="#" target="_blank" rel="noopener">Charterbus anfragen →</a></span>
+            </div>
           </label>
         </div>
 
-        <div class="shuttle-total" id="shuttleTotal">Noch keine Fahrt ausgewählt.</div>
+        <label class="addon" data-anreise="spaeter" style="margin-top:16px">
+          <input type="checkbox" id="anreise-spaeter">
+          <div><strong>Entscheide ich später</strong><span>Verbindliche Angabe spätestens 7 Tage vor Anreise nötig</span></div>
+        </label>
+
+        <!-- Shuttle-Anfrage: erscheint nur bei ausgewähltem Shuttle -->
+        <div class="shuttle-box" id="shuttleBox" hidden>
+          <strong>Shuttle direkt anfragen</strong>
+          <p>Bahnhof Freiburg ⇄ Uni-Haus, 300 € pro Fahrt. Die Fahrten werden für die im Kalender gewählten Tage angefragt und mit der Endrechnung abgerechnet.</p>
+
+          <div class="addon-grid" style="margin-top:0">
+            <label class="addon" data-shuttle="hin">
+              <input type="checkbox" id="shuttle-hin">
+              <div><strong>Fahrt zur Anreise</strong><span id="shuttleHinDate">Anreisetag noch nicht gewählt</span></div>
+            </label>
+            <label class="addon" data-shuttle="rueck">
+              <input type="checkbox" id="shuttle-rueck">
+              <div><strong>Fahrt zur Abreise</strong><span id="shuttleRueckDate">Abreisetag noch nicht gewählt</span></div>
+            </label>
+          </div>
+
+          <div class="shuttle-total" id="shuttleTotal">Noch keine Fahrt ausgewählt.</div>
+        </div>
       </div>
 
       <div class="wizard-actions">
@@ -1723,8 +1732,9 @@ footer nav{gap:20px}
 /* TODO: echte URL des Partnerbetriebs eintragen */
 const PARTNER_BUS_URL = "https://www.example-busreisen-freiburg.de";
 const SHUTTLE_PRICE = 300;          // € pro Fahrt
-const PRIORITY_WEEKS = 5;           // Wochen Studi-Vorrang ab Semesterbeginn
+const PRIORITY_WEEKS = 5;           // Wochen Vorrang für Fachschaften/Studierende ab Semesterbeginn
 const WAITLIST_DECISION_WEEKS = 4;  // Zusage/Absage X Wochen vor Anreise
+const MIN_PEOPLE = 8;               // Mindestanzahl an Personen pro Buchung
 
 /* ---------------- state ---------------- */
 const state = {
@@ -1735,12 +1745,13 @@ const state = {
   purpose: "seminar",
   usage: "overnight",
   addons: { sauna:false, vollpension:false, technik:false, reinigung:false },
+  anreisePlanen: false,
   anreiseart: { oepnv:false, fahrrad:false, shuttle:false, pkw:false, bus:false, spaeter:false },
   shuttle: { hin:false, rueck:false }
 };
 
 const RATES = { student:18, research:28, external:44 };
-const GROUP_LABEL = { student:"Studierende", research:"Forschungsgruppe", external:"Unternehmen / Externe" };
+const GROUP_LABEL = { student:"Fachschaften/Studierende", research:"Uni-interne Gruppen", external:"Unternehmen / Externe" };
 const PURPOSE_LABEL = { seminar:"Seminar / Lehrveranstaltung", retreat:"Retreat / Gruppenfahrt", tagung:"Tagung / Workshop", event:"Event / Teambuilding" };
 const USAGE_LABEL = { overnight:"Übernachtung", seminar:"Seminarraum", both:"Übernachtung + Seminarraum" };
 const ANREISEART_LABEL = {
@@ -1765,7 +1776,7 @@ const ADDON_META = {
 };
 
 /* Semesterbeginn = Beginn der Vorlesungszeit (Quelle: uni-freiburg.de).
-   Die ersten PRIORITY_WEEKS Wochen ab diesem Datum sind für Studierende
+   Die ersten PRIORITY_WEEKS Wochen ab diesem Datum sind für Fachschaften/Studierende
    reserviert. Alle übrigen Tage sind für alle drei Gruppen frei buchbar. */
 const SEMESTER_STARTS = [
   { start:"2026-04-20", name:"SoSe 2026" },
@@ -1776,12 +1787,12 @@ const SEMESTER_STARTS = [
 ];
 
 const AVAILABILITY_TEXT = {
-  student: "Du kannst das ganze Jahr über buchen. In den ersten fünf Wochen jedes Semesters (hellgrün im Kalender) haben Studierende Vorrang — dort buchst du direkt und ohne Warteliste.",
-  research: "Ihr könnt das ganze Jahr über buchen. Nur die ersten fünf Wochen jedes Semesters (gelb im Kalender) sind für Studierende reserviert — dort ist eine Reservierung über die Warteliste möglich.",
-  external: "Sie können das ganze Jahr über buchen. Nur die ersten fünf Wochen jedes Semesters (gelb im Kalender) sind für Studierende reserviert — dort ist eine Reservierung über die Warteliste möglich."
+  student: "Du kannst das ganze Jahr über buchen. In den ersten fünf Wochen jedes Semesters (hellgrün im Kalender) haben Fachschaften/Studierende Vorrang — dort buchst du direkt und ohne Warteliste.",
+  research: "Ihr könnt das ganze Jahr über buchen. Nur die ersten fünf Wochen jedes Semesters (gelb im Kalender) sind für Fachschaften/Studierende reserviert — dort ist eine Reservierung über die Warteliste möglich.",
+  external: "Sie können das ganze Jahr über buchen. Nur die ersten fünf Wochen jedes Semesters (gelb im Kalender) sind für Fachschaften/Studierende reserviert — dort ist eine Reservierung über die Warteliste möglich."
 };
 
-const PRIORITY_TOOLTIP = "Dieser Zeitraum ist ausschließlich für Studierende reserviert. Eine Reservierung ist über die Warteliste möglich.";
+const PRIORITY_TOOLTIP = "Dieser Zeitraum ist ausschließlich für Fachschaften/Studierende reserviert. Eine Reservierung ist über die Warteliste möglich.";
 
 const ROUTES = ["home","ueber","zielgruppen","preise","faq",
   "buchung-gruppe","buchung-termin","buchung-zusatz","buchung-uebersicht","buchung-bestaetigung"];
@@ -1827,7 +1838,7 @@ function priorityRangeFor(dateStr){
 }
 function isPriorityDay(dateStr){ return !!priorityRangeFor(dateStr); }
 
-/* Warteliste gilt für alle Gruppen außer Studierende */
+/* Warteliste gilt für alle Gruppen außer Fachschaften/Studierende */
 function isWaitlistDay(dateStr){ return state.group !== "student" && isPriorityDay(dateStr); }
 
 /* Berührt der gewählte Aufenthalt (Anreise .. Abreise) einen Vorrangtag? */
@@ -1883,7 +1894,7 @@ function renderLegend(){
   document.getElementById("calLegend").innerHTML = [
     '<span><i class="dot free"></i>Frei buchbar</span>',
     isStudent
-      ? '<span><i class="dot priority"></i>Vorrang für Studierende</span>'
+      ? '<span><i class="dot priority"></i>Vorrang für Fachschaften/Studierende</span>'
       : '<span><i class="dot waitlist"></i>Nur Warteliste (Studi-Vorrang)</span>',
     '<span><i class="dot range"></i>Ausgewählt</span>'
   ].join("");
@@ -1914,13 +1925,13 @@ function renderCalendar(){
     if(isPastDate(dateStr)){
       cls += " past";
     } else if(isWaitlistDay(dateStr)){
-      cls += " waitlist";           // Forschung & Externe: buchbar, aber nur über Warteliste
+      cls += " waitlist";
       clickable = true;
       title = PRIORITY_TOOLTIP;
     } else if(isPriorityDay(dateStr)){
-      cls += " free priority";      // Studierende: Vorrangzeitraum, direkt buchbar
+      cls += " free priority";
       clickable = true;
-      title = "Vorrangzeitraum für Studierende — direkt buchbar.";
+      title = "Vorrangzeitraum für Fachschaften/Studierende — direkt buchbar.";
     } else {
       cls += " free";
       clickable = true;
@@ -1947,7 +1958,6 @@ function renderCalendar(){
   renderShuttleBox();
 }
 
-/* Hover-Erklärung unterhalb des Kalenders */
 document.getElementById("calGrid").addEventListener("mouseover", function(e){
   const cell = e.target.closest(".cal-cell");
   if(!cell || cell.classList.contains("pad")) return;
@@ -1958,7 +1968,7 @@ document.getElementById("calGrid").addEventListener("mouseover", function(e){
     hint.textContent = PRIORITY_TOOLTIP;
   } else if(cell.classList.contains("priority")){
     hint.classList.remove("warn");
-    hint.textContent = "Vorrangzeitraum für Studierende — als Studierende/r direkt buchbar.";
+    hint.textContent = "Vorrangzeitraum für Fachschaften/Studierende — als Fachschaft/Studierende/r direkt buchbar.";
   } else if(cell.classList.contains("past")){
     hint.classList.remove("warn");
     hint.textContent = "Vergangener Tag.";
@@ -1984,7 +1994,7 @@ function renderWaitlistNote(){
     "<strong>Wartelistenplatz statt Direktbuchung.</strong><br>"
     + "Der gewählte Zeitraum liegt in den ersten " + PRIORITY_WEEKS + " Wochen des Semesters"
     + (range ? " (" + range.name + ", " + fmtDEShort(range.from) + " – " + fmtDEShort(range.to) + ")" : "")
-    + " und ist vorrangig für Studierende reserviert. Die Anfrage wird vorgemerkt, aber nicht sofort bestätigt. "
+    + " und ist vorrangig für Fachschaften/Studierende reserviert. Die Anfrage wird vorgemerkt, aber nicht sofort bestätigt. "
     + WAITLIST_DECISION_WEEKS + " Wochen vor Anreise erfolgt Zusage oder Absage — bis dahin fallen keine Kosten an.";
 }
 
@@ -2072,8 +2082,6 @@ function renderStepper(currentRoute){
 
 /* ---------------- group selection ---------------- */
 function selectGroup(group, nextRoute){
-  // Zeitraum bleibt erhalten: alle Tage sind für alle Gruppen wählbar,
-  // nur der Status (Direktbuchung vs. Warteliste) ändert sich.
   state.group = group;
   document.querySelectorAll("[data-select-group]").forEach(el => {
     el.classList.toggle("selected", el.dataset.selectGroup === group);
@@ -2094,13 +2102,15 @@ function renderTermin(){
   document.getElementById("termin-sub").textContent =
     "Zeitraum, Gruppengröße, Zweck und Anreiseart für " + (GROUP_LABEL[state.group] || "deine Gruppe") + ".";
 
+  document.getElementById("anreise-planen").checked = state.anreisePlanen;
+  document.getElementById("anreiseartOptionen").hidden = !state.anreisePlanen;
+
   Object.keys(state.anreiseart).forEach(key => {
     const box = document.getElementById("anreise-" + key);
     box.checked = state.anreiseart[key];
     box.closest(".addon").classList.toggle("checked", state.anreiseart[key]);
   });
 
-  // Kalenderansicht auf den gewählten Anreisemonat springen (falls vorhanden)
   if(state.start){
     const d = toDate(state.start);
     calView.year = d.getFullYear();
@@ -2108,6 +2118,23 @@ function renderTermin(){
   }
   renderCalendar();
 }
+
+document.getElementById("anreise-planen").addEventListener("change", function(){
+  state.anreisePlanen = this.checked;
+  document.getElementById("anreiseartOptionen").hidden = !state.anreisePlanen;
+
+  if(!state.anreisePlanen){
+    Object.keys(state.anreiseart).forEach(k => {
+      state.anreiseart[k] = false;
+      const b = document.getElementById("anreise-" + k);
+      b.checked = false;
+      b.closest(".addon").classList.remove("checked");
+    });
+    state.shuttle.hin = false;
+    state.shuttle.rueck = false;
+    renderShuttleBox();
+  }
+});
 
 /* ---------------- shuttle ---------------- */
 function renderShuttleBox(){
@@ -2154,7 +2181,6 @@ document.querySelectorAll('[data-shuttle]').forEach(function(el){
 /* ---------------- anreisearten ---------------- */
 document.querySelectorAll('[data-anreise]').forEach(function(el){
   el.addEventListener("click", function(e){
-    // Klick auf den Partner-Link soll die Checkbox nicht togglen
     if(e.target.closest("a")) return;
 
     if(e.target.tagName !== "INPUT"){
@@ -2165,7 +2191,6 @@ document.querySelectorAll('[data-anreise]').forEach(function(el){
     const checked = el.querySelector("input").checked;
 
     if(key === "spaeter" && checked){
-      // "später" schließt konkrete Anreisearten aus
       ["oepnv","fahrrad","shuttle","pkw","bus"].forEach(function(k){
         state.anreiseart[k] = false;
         const b = document.getElementById("anreise-" + k);
@@ -2190,16 +2215,26 @@ document.getElementById("terminNextBtn").addEventListener("click", function(){
     alert("Bitte Anreise- und Abreisetag im Kalender wählen.");
     return;
   }
-  const anyAnreise = Object.values(state.anreiseart).some(v => v);
-  if(!anyAnreise){
-    alert("Bitte eine Anreiseart wählen — oder \u201eEntscheide ich später\u201c ankreuzen.");
+
+  const peopleVal = Number(document.getElementById("people").value) || 0;
+  if(peopleVal < MIN_PEOPLE){
+    alert("Die Mindestanzahl an Personen für eine Buchung liegt bei " + MIN_PEOPLE + ".");
     return;
   }
-  if(state.anreiseart.shuttle && shuttleTrips() === 0){
-    alert("Bitte mindestens eine Shuttle-Fahrt (Anreise und/oder Abreise) wählen — oder den Shuttleservice abwählen.");
-    return;
+
+  if(state.anreisePlanen){
+    const anyAnreise = Object.values(state.anreiseart).some(v => v);
+    if(!anyAnreise){
+      alert("Bitte eine Anreiseart wählen — oder \u201eEntscheide ich später\u201c ankreuzen.");
+      return;
+    }
+    if(state.anreiseart.shuttle && shuttleTrips() === 0){
+      alert("Bitte mindestens eine Shuttle-Fahrt (Anreise und/oder Abreise) wählen — oder den Shuttleservice abwählen.");
+      return;
+    }
   }
-  state.people = Number(document.getElementById("people").value) || 1;
+
+  state.people = peopleVal;
   state.purpose = document.getElementById("purpose").value;
   state.usage = document.getElementById("usageType").value;
   navigate("buchung-zusatz");
@@ -2257,12 +2292,12 @@ function renderUebersicht(){
 
   const rows = [
     ["Zielgruppe", GROUP_LABEL[state.group] || "—", "buchung-gruppe", false],
-    ["Status", waitlist ? "Warteliste (Vorrang für Studierende)" : "Direkt buchbar", "buchung-termin", waitlist],
+    ["Status", waitlist ? "Warteliste (Vorrang für Fachschaften/Studierende)" : "Direkt buchbar", "buchung-termin", waitlist],
     ["Zeitraum", state.start && state.end ? (fmtDEShort(state.start) + " – " + fmtDEShort(state.end) + " · " + nights + " Nacht/Nächte") : "—", "buchung-termin", false],
     ["Personen", state.people + " Personen", "buchung-termin", false],
     ["Zweck", PURPOSE_LABEL[state.purpose], "buchung-termin", false],
     ["Nutzung", USAGE_LABEL[state.usage], "buchung-termin", false],
-    ["Anreiseart", anreiseNames.length ? anreiseNames.join(", ") : "—", "buchung-termin", false]
+    ["Anreiseart", state.anreisePlanen ? (anreiseNames.length ? anreiseNames.join(", ") : "—") : "Nicht mit uns geplant", "buchung-termin", false]
   ];
 
   if(shuttleTrips()){
@@ -2291,7 +2326,7 @@ function renderUebersicht(){
   warn.hidden = !waitlist;
   if(waitlist){
     warn.innerHTML = "<strong>Diese Anfrage ist eine Wartelisten-Reservierung.</strong><br>"
-      + "Der Zeitraum ist vorrangig für Studierende reserviert. Zusage oder Absage erfolgt "
+      + "Der Zeitraum ist vorrangig für Fachschaften/Studierende reserviert. Zusage oder Absage erfolgt "
       + WAITLIST_DECISION_WEEKS + " Wochen vor Anreise. Es wird nichts abgebucht, es entstehen keine Stornokosten.";
   }
 
@@ -2319,7 +2354,7 @@ document.getElementById("confirmBtn").addEventListener("click", function(){
   if(waitlist){
     const range = priorityRangeFor(state.start) || priorityRangeFor(state.end);
     checklistItems.push(["Wartelistenplatz vorgemerkt",
-      "Der Zeitraum" + (range ? " (" + range.name + ")" : "") + " ist vorrangig für Studierende reserviert. Zusage oder Absage bis zum "
+      "Der Zeitraum" + (range ? " (" + range.name + ")" : "") + " ist vorrangig für Fachschaften/Studierende reserviert. Zusage oder Absage bis zum "
       + fmtDEShort(addDays(state.start, -WAITLIST_DECISION_WEEKS * 7)) + ", also " + WAITLIST_DECISION_WEEKS + " Wochen vor Anreise.", true]);
     checklistItems.push(["Keine Zahlung, keine Stornokosten",
       "Bis zur Zusage wird nichts abgebucht. Bei Absage schlagen wir freie Alternativtermine vor.", true]);
@@ -2337,7 +2372,7 @@ document.getElementById("confirmBtn").addEventListener("click", function(){
       'Der Bus wird nicht über das Uni-Haus gebucht. Anfrage direkt beim Partnerbetrieb: <a href="' + PARTNER_BUS_URL + '" target="_blank" rel="noopener">Charterbus anfragen</a>.', false]);
   }
 
-  if(state.anreiseart.spaeter){
+  if(state.anreisePlanen && state.anreiseart.spaeter){
     checklistItems.push(["Anreiseart nachtragen",
       "Verbindlich bis spätestens 7 Tage vor Anreise (" + fmtDEShort(state.start) + ") im Buchungsportal angeben.", false]);
   }
